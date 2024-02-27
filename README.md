@@ -24,7 +24,7 @@ and `controller` layers:
 - `com.mjc.school.repository.model.BaseEntity`
 - `com.mjc.school.repository.BaseRepository`
 - `com.mjc.school.service.BaseService`
-- `com.mjc.school.controller.BaseController`
+- `com.mjc.school.controller.com.mjc.school.BaseController`
 
 Use `org.springframework.boot:spring-boot-starter-data-jpa` dependency for
 your solution, but with only one restriction: **it's prohibited to use CRUD repositories**, because the main goal of
