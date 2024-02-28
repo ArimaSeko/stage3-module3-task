@@ -19,6 +19,10 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.7.7'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.5.5.Final'
+    implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"
+
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'

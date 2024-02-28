@@ -16,8 +16,6 @@ import java.time.LocalDateTime;
 @Table(name="author")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 public class Author implements BaseEntity<Long>{
     @Id
     @Column(name="id")
@@ -25,7 +23,41 @@ public class Author implements BaseEntity<Long>{
     @Column(name="name")
     private String name;
     @Column(name="create_date")
-    private Date createDate;
+    private LocalDateTime createDate;
     @Column(name="last_update_time")
-    private Date lastUpdateTime;
+    private LocalDateTime lastUpdateTime;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+
+    public LocalDateTime getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(LocalDateTime lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
 }
