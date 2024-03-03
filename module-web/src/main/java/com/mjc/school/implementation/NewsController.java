@@ -13,15 +13,21 @@ import java.util.List;
 @Controller
 @Component("newsController")
 public class NewsController implements BaseController <NewsDtoRequest, NewsDtoResponse, Long>  {
+    @Qualifier("newsService")
+    private final NewsService newsService;
+
+    public NewsController(NewsService newsService) {
+        this.newsService = newsService;
+    }
 
     @Override
     public List<NewsDtoResponse> readAll() {
-        return null;
+        return newsService.readAll();
     }
 
     @Override
     public NewsDtoResponse readById(Long id) {
-        return null;
+        return newsService.readById(id);
     }
 
     @Override

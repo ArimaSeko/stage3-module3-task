@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -11,8 +12,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name="news")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class News  implements BaseEntity <Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,14 +21,41 @@ public class News  implements BaseEntity <Long>{
     private Long id;
     @Column(name="title", nullable = false)
     private String title;
+    @Column(name="content", nullable = false)
+    private String content;
     @Column(name="create_date", nullable = false)
-    private Date createDate;
+    private LocalDateTime createDate;
+    @LastModifiedDate
     @Column(name="last_update_time", nullable = false)
-    private Date lastUpdateTime;
-    @Column(name="author_id", nullable = false)
-    private Long author;
+    private LocalDateTime lastUpdateTime;
+    @Column(name="author_id", nullable = true)
+    private Long authorId;
 
-
+//    public News(String title, String content, Long authorId) {
+//        this.lastUpdateTime = LocalDateTime.now();
+//        this.createDate=LocalDateTime.now();
+//        this.title = title;
+//        this.content = content;
+//        this.authorId = authorId;
+//    }
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+    public LocalDateTime getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+    public void setLastUpdateTime(LocalDateTime lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
+    public String getContent() {
+        return content;
+    }
+    public void setContent(String content) {
+        this.content = content;
+    }
     public String getTitle() {
         return title;
     }
@@ -35,38 +63,20 @@ public class News  implements BaseEntity <Long>{
     public void setTitle(String title) {
         this.title = title;
     }
-
-    public Date getCreateDate() {
-        return createDate;
+    public Long getAuthorId() {
+        return authorId;
     }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setAuthorId(Long author) {
+        this.authorId = author;
     }
-
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
-    public Long getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Long author) {
-        this.author = author;
-    }
-
     @Override
-    public Long getId() {
-        return null;
+    public Long getId(
+    ) {
+        return this.id;
     }
 
     @Override
     public void setId(Long id) {
-
+    this.id=id;
     }
 }

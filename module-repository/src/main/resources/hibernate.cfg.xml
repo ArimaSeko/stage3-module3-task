@@ -20,6 +20,7 @@
            310857
         </property>
         <mapping class="com.mjc.school.model.Author"/>
+        <mapping class="com.mjc.school.model.News" />
 
     </session-factory>
 </hibernate-configuration>

@@ -4,6 +4,7 @@ import com.mjc.school.BaseRepository;
 import com.mjc.school.BaseService;
 import com.mjc.school.dto.AuthorDtoRequest;
 import com.mjc.school.dto.AuthorDtoResponse;
+import com.mjc.school.exceptions.NotFoundException;
 import com.mjc.school.mappers.AuthorMapper;
 import com.mjc.school.model.Author;
 import org.mapstruct.factory.Mappers;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.mjc.school.exceptions.ServiceErrorCode.AUTHOR_ID_DOES_NOT_EXIST;
+import static com.mjc.school.exceptions.ServiceErrorCode.NEWS_ID_DOES_NOT_EXIST;
 
 @Service
 @Component("authorService")
@@ -38,21 +42,38 @@ public class AuthorService implements BaseService <AuthorDtoRequest, AuthorDtoRe
 
     @Override
     public AuthorDtoResponse readById(Long id) {
-        return null;
+
+        return authorRepository.readById(id)
+                .map(authorMapper::modelToDto)
+                .orElseThrow(
+                        () -> new NotFoundException(String.format(AUTHOR_ID_DOES_NOT_EXIST.getMessage(), id)));
     }
 
     @Override
     public AuthorDtoResponse create(AuthorDtoRequest createRequest) {
-        return null;
+        Author authorRq = authorMapper.dtoToModel(createRequest);
+        Author authorRp = authorRepository.create(authorRq);
+        return authorMapper.modelToDto(authorRp);
     }
 
     @Override
     public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
-        return null;
+        if(authorRepository.existById(updateRequest.id())){
+        Author rq = authorMapper.dtoToModel(updateRequest);
+        Author rp = authorRepository.update(rq);
+        return authorMapper.modelToDto(rp);}
+        else {
+            throw new NotFoundException(
+                    String.format(AUTHOR_ID_DOES_NOT_EXIST.getMessage(), updateRequest.id()));
+        }
     }
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        if (authorRepository.existById(id)) {
+            return authorRepository.deleteById(id);
+        } else {
+            throw new NotFoundException(String.format(AUTHOR_ID_DOES_NOT_EXIST.getMessage(), id));
+        }
     }
 }

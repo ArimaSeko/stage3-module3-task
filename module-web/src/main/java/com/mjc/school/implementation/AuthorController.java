@@ -27,7 +27,7 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
 
     @Override
     public AuthorDtoResponse readById(Long id) {
-        return null;
+        return authorService.readById(id);
     }
 
     @Override

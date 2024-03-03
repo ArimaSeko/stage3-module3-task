@@ -3,15 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.48">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-4||-9223372036854775808|c|G
-4||10|c|G
-4||10|C|G
-4||10|T|G</Grants>
-      <IntrospectionStateNumber>777</IntrospectionStateNumber>
+      <IntrospectionStateNumber>780</IntrospectionStateNumber>
       <ServerVersion>16.2</ServerVersion>
       <StartupTime>1708777385</StartupTime>
       <TimeZones>true ACDT
@@ -813,7 +805,7 @@ false Zulu
 14643||10|C|G
 14643||-9223372036854775808|U|G
 14643||10|U|G</Grants>
-      <IntrospectionStateNumber>777</IntrospectionStateNumber>
+      <IntrospectionStateNumber>780</IntrospectionStateNumber>
       <ObjectId>16415</ObjectId>
       <OwnerName>Muka</OwnerName>
     </database>
@@ -4240,7 +4232,7 @@ false Zulu
     <schema id="265" parent="3" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>777</IntrospectionStateNumber>
+      <IntrospectionStateNumber>780</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>524</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4248,7 +4240,7 @@ false Zulu
     <sequence id="266" parent="265" name="author_id_seq">
       <DasType>integer|0s</DasType>
       <ObjectId>16436</ObjectId>
-      <SequenceIdentity>1(2)</SequenceIdentity>
+      <SequenceIdentity>1(17)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>770</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4256,7 +4248,7 @@ false Zulu
     <sequence id="267" parent="265" name="news_id_seq">
       <DasType>integer|0s</DasType>
       <ObjectId>16437</ObjectId>
-      <SequenceIdentity>1(2)</SequenceIdentity>
+      <SequenceIdentity>1(12)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>774</StateNumber>
       <OwnerName>postgres</OwnerName>
