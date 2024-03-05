@@ -45,7 +45,7 @@ public class AuthorRepository implements BaseRepository<Author, Long> {
                 (Author) entityManager.createNativeQuery
                         ("select * from Author where id="+id, Author.class).getSingleResult();
 
-        return Optional.of(author);
+        return Optional.ofNullable(author);
     }
 
     @Override

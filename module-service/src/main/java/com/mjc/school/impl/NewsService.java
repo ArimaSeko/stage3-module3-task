@@ -51,9 +51,9 @@ public class NewsService implements BaseService <NewsDtoRequest, NewsDtoResponse
 
     @Override
     public NewsDtoResponse create(NewsDtoRequest createRequest) {
-
-
-        return null;
+        News newsRQ =newsMapper.dtoToModel(createRequest);
+        News newsRP = newsRepository.create(newsRQ);
+        return newsMapper.newsToDto(newsRP);
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.mjc.school.impl;
 import com.mjc.school.BaseRepository;
 import com.mjc.school.model.Author;
 import com.mjc.school.model.News;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -52,28 +54,48 @@ public class NewsRepository implements BaseRepository <News, Long>{
         Root<News> newsRoot = cq.from(News.class);
         cq.select(newsRoot).where(cb.equal(newsRoot.get("id"), id));
         News newsResult = entityManager.createQuery(cq).getSingleResult();
-        return Optional.of(newsResult);
+        return Optional.ofNullable(newsResult);
     }
 
     @Override
     public News create(News entity) {
-
-
-        return null;
+        entityManager.getTransaction().begin();
+        entityManager.persist(entity);
+        entityManager.getTransaction().commit();
+        return  entity;
     }
 
     @Override
     public News update(News entity) {
+        entityManager.getTransaction().begin();
+        Optional<News> newsOptional= readById(entity.getId());
+        if (newsOptional.isEmpty()) {
+            return null;
+        }
+        News news = newsOptional.get();
+        news.setContent(entity.getContent());
+        news.setTitle(entity.getTitle());
+        news.setAuthorId(entity.getAuthorId());
+        news.setCreateDate(entity.getCreateDate());
+        news.setLastUpdateTime(entity.getLastUpdateTime());
+        entityManager.getTransaction().commit();
         return null;
     }
 
     @Override
     public boolean deleteById(Long id) {
+        if (existById(id)) {
+            entityManager.getTransaction().begin();
+            News news = readById(id).get();
+            entityManager.remove(news);
+            entityManager.getTransaction().commit();
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean existById(Long id) {
-        return false;
+        return readById(id)!=null;
     }
 }

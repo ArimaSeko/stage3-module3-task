@@ -32,16 +32,16 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
 
     @Override
     public AuthorDtoResponse create(AuthorDtoRequest createRequest) {
-        return null;
+        return authorService.create(createRequest);
     }
 
     @Override
     public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
-        return null;
+        return authorService.update(updateRequest);
     }
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        return authorService.deleteById(id);
     }
 }
