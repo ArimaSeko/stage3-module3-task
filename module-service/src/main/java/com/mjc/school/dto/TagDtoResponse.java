@@ -1,4 +1,7 @@
 package com.mjc.school.dto;
 
-public record TagDtoResponse (){
+public record TagDtoResponse (
+        Long id,
+        String name
+){
 }

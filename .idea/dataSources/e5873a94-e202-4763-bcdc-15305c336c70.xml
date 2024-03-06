@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.48">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>780</IntrospectionStateNumber>
+      <IntrospectionStateNumber>784</IntrospectionStateNumber>
       <ServerVersion>16.2</ServerVersion>
       <StartupTime>1708777385</StartupTime>
       <TimeZones>true ACDT
@@ -805,7 +805,7 @@ false Zulu
 14643||10|C|G
 14643||-9223372036854775808|U|G
 14643||10|U|G</Grants>
-      <IntrospectionStateNumber>780</IntrospectionStateNumber>
+      <IntrospectionStateNumber>784</IntrospectionStateNumber>
       <ObjectId>16415</ObjectId>
       <OwnerName>Muka</OwnerName>
     </database>
@@ -4232,7 +4232,7 @@ false Zulu
     <schema id="265" parent="3" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>780</IntrospectionStateNumber>
+      <IntrospectionStateNumber>784</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>524</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4273,13 +4273,19 @@ false Zulu
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="271" parent="265" name="tag">
-      <ObjectId>16431</ObjectId>
-      <StateNumber>763</StateNumber>
+    <table id="271" parent="265" name="news_tag">
+      <ObjectId>16439</ObjectId>
+      <StateNumber>782</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="272" parent="269" name="id">
+    <table id="272" parent="265" name="tag">
+      <ObjectId>16431</ObjectId>
+      <StateNumber>782</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <column id="273" parent="269" name="id">
       <DasType>integer|0s</DasType>
       <IdentityKind>always</IdentityKind>
       <NotNull>1</NotNull>
@@ -4288,28 +4294,28 @@ false Zulu
       <SequenceId>16436</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="273" parent="269" name="name">
+    <column id="274" parent="269" name="name">
       <DasType>char(15)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>760</StateNumber>
       <TypeId>1042</TypeId>
     </column>
-    <column id="274" parent="269" name="create_date">
+    <column id="275" parent="269" name="create_date">
       <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>760</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="275" parent="269" name="last_update_time">
+    <column id="276" parent="269" name="last_update_time">
       <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>761</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <index id="276" parent="269" name="author_pkey">
+    <index id="277" parent="269" name="author_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16419</ObjectId>
@@ -4318,14 +4324,14 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="277" parent="269" name="author_pkey">
+    <key id="278" parent="269" name="author_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16420</ObjectId>
       <Primary>1</Primary>
       <StateNumber>760</StateNumber>
       <UnderlyingIndexId>16419</UnderlyingIndexId>
     </key>
-    <column id="278" parent="270" name="id">
+    <column id="279" parent="270" name="id">
       <DasType>integer|0s</DasType>
       <IdentityKind>always</IdentityKind>
       <NotNull>1</NotNull>
@@ -4334,40 +4340,40 @@ false Zulu
       <SequenceId>16437</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="279" parent="270" name="title">
+    <column id="280" parent="270" name="title">
       <DasType>char(30)|0s</DasType>
       <Position>2</Position>
       <StateNumber>762</StateNumber>
       <TypeId>1042</TypeId>
     </column>
-    <column id="280" parent="270" name="content">
+    <column id="281" parent="270" name="content">
       <DasType>char(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>762</StateNumber>
       <TypeId>1042</TypeId>
     </column>
-    <column id="281" parent="270" name="create_date">
+    <column id="282" parent="270" name="create_date">
       <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>762</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="282" parent="270" name="last_update_time">
+    <column id="283" parent="270" name="last_update_time">
       <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>762</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="283" parent="270" name="author_id">
+    <column id="284" parent="270" name="author_id">
       <DasType>integer|0s</DasType>
       <Position>6</Position>
       <StateNumber>762</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="284" parent="270" name="fk_author_id">
+    <foreign-key id="285" parent="270" name="fk_author_id">
       <ColNames>author_id</ColNames>
       <ObjectId>16426</ObjectId>
       <RefColNames>id</RefColNames>
@@ -4377,7 +4383,7 @@ false Zulu
       <RefTableName>author</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <index id="285" parent="270" name="news_pkey">
+    <index id="286" parent="270" name="news_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16424</ObjectId>
@@ -4386,30 +4392,62 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="286" parent="270" name="news_pkey">
+    <key id="287" parent="270" name="news_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16425</ObjectId>
       <Primary>1</Primary>
       <StateNumber>762</StateNumber>
       <UnderlyingIndexId>16424</UnderlyingIndexId>
     </key>
-    <column id="287" parent="271" name="id">
+    <column id="288" parent="271" name="news_id">
       <DasType>integer|0s</DasType>
-      <IdentityKind>always</IdentityKind>
+      <Position>1</Position>
+      <StateNumber>782</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="289" parent="271" name="tag_id">
+      <DasType>integer|0s</DasType>
+      <Position>2</Position>
+      <StateNumber>782</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="290" parent="271" name="fk_news_id">
+      <ColNames>news_id</ColNames>
+      <ObjectId>16442</ObjectId>
+      <RefColNames>id</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>782</StateNumber>
+      <RefTableId>16421</RefTableId>
+      <RefTableName>news</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <foreign-key id="291" parent="271" name="fk_tag_id">
+      <ColNames>tag_id</ColNames>
+      <ObjectId>16447</ObjectId>
+      <RefColNames>id</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>782</StateNumber>
+      <RefTableId>16431</RefTableId>
+      <RefTableName>tag</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <column id="292" parent="272" name="id">
+      <DasType>integer|0s</DasType>
+      <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>775</StateNumber>
+      <StateNumber>781</StateNumber>
       <SequenceId>16438</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="288" parent="271" name="name">
+    <column id="293" parent="272" name="name">
       <DasType>char(15)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>763</StateNumber>
       <TypeId>1042</TypeId>
     </column>
-    <index id="289" parent="271" name="tag_pkey">
+    <index id="294" parent="272" name="tag_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16434</ObjectId>
@@ -4418,7 +4456,7 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="290" parent="271" name="tag_pkey">
+    <key id="295" parent="272" name="tag_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16435</ObjectId>
       <Primary>1</Primary>

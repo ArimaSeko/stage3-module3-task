@@ -21,6 +21,8 @@
         </property>
         <mapping class="com.mjc.school.model.Author"/>
         <mapping class="com.mjc.school.model.News" />
+        <mapping class="com.mjc.school.model.Tag" />
+
 
     </session-factory>
 </hibernate-configuration>

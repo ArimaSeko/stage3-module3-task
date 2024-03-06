@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name="news")
@@ -31,13 +32,12 @@ public class News  implements BaseEntity <Long>{
     @Column(name="author_id", nullable = true)
     private Long authorId;
 
-//    public News(String title, String content, Long authorId) {
-//        this.lastUpdateTime = LocalDateTime.now();
-//        this.createDate=LocalDateTime.now();
-//        this.title = title;
-//        this.content = content;
-//        this.authorId = authorId;
-//    }
+    @ManyToMany
+    @JoinTable(
+            name = "news_tag",
+            joinColumns = @JoinColumn(name = "news_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private Set<Tag> tags;
     public LocalDateTime getCreateDate() {
         return createDate;
     }

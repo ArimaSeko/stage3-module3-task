@@ -18,9 +18,8 @@ public class Tag implements BaseEntity <Long>{
     @Column(name="name")
     private String name;
 
-    @ManyToMany
-    private List<News> newsList;
-
+    @ManyToMany(mappedBy = "tags")
+    private List<News> news;
     public Long getId() {
         return id;
     }
