@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface TagMapper {
-    List<NewsDtoResponse> ListToDtoList(List<Tag> tagList);
+    List<TagDtoResponse> ListToDtoList(List<Tag> tagList);
     Tag dtoToModel(TagDtoRequest tagDtoRequest);
-    TagDtoResponse ModelToDto(Tag tag);
+    TagDtoResponse modelToDto(Tag tag);
 }

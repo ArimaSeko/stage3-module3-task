@@ -4,25 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b1ee5e9-2cf0-4efc-bd79-82cadfe98eed" name="Changes" comment="4 05\3\2024">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e5873a94-e202-4763-bcdc-15305c336c70.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e5873a94-e202-4763-bcdc-15305c336c70.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e5873a94-e202-4763-bcdc-15305c336c70/storage_v2/_src_/database/MukhaDB.WmH7tg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e5873a94-e202-4763-bcdc-15305c336c70/storage_v2/_src_/database/MukhaDB.WmH7tg/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/impl/TagRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/impl/TagRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/model/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/model/News.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/model/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/model/Tag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-repository/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/dto/TagDtoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/dto/TagDtoRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/dto/TagDtoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/dto/TagDtoResponse.java" afterDir="false" />
+    <list default="true" id="8b1ee5e9-2cf0-4efc-bd79-82cadfe98eed" name="Changes" comment="5 05\3\2024">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-main/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/module-main/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/config/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/impl/TagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/impl/TagService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/mappers/TagMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/mappers/TagMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/implementation/TagController.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/implementation/TagController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/BaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/implementation/AuthorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/AuthorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/implementation/NewsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/NewsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/implementation/TagController.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/TagController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,9 +92,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Record" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -165,7 +159,7 @@
       <module name="stage3-module3-task.module-main.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.mjc.school.*" />
+          <option name="PATTERN" value="com.mjc.school.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -288,6 +282,8 @@
       <workItem from="1709395262430" duration="1178000" />
       <workItem from="1709460114505" duration="9309000" />
       <workItem from="1709645010733" duration="6252000" />
+      <workItem from="1709707903966" duration="175000" />
+      <workItem from="1709737739946" duration="5182000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1709074059189</created>
@@ -317,7 +313,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709648004907</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="5 05\3\2024">
+      <created>1709707993981</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1709707993981</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -339,6 +342,7 @@
     <MESSAGE value="2 28\2\2024" />
     <MESSAGE value="3 03\3\2024" />
     <MESSAGE value="4 05\3\2024" />
-    <option name="LAST_COMMIT_MESSAGE" value="4 05\3\2024" />
+    <MESSAGE value="5 05\3\2024" />
+    <option name="LAST_COMMIT_MESSAGE" value="5 05\3\2024" />
   </component>
 </project>

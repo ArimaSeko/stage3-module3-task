@@ -1,11 +1,12 @@
-package com.mjc.school.implementation;
+package com.mjc.school.controller.implementation;
 
-import com.mjc.school.BaseController;
+import com.mjc.school.controller.BaseController;
 import com.mjc.school.BaseService;
+import com.mjc.school.controller.annotation.CommandBody;
+import com.mjc.school.controller.annotation.CommandHandler;
+import com.mjc.school.controller.annotation.CommandParam;
 import com.mjc.school.dto.AuthorDtoRequest;
 import com.mjc.school.dto.AuthorDtoResponse;
-import com.mjc.school.dto.NewsDtoRequest;
-import com.mjc.school.dto.NewsDtoResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -21,27 +22,32 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
         this.authorService = authorService;
     }
     @Override
+    @CommandHandler(operation = 6)
     public List<AuthorDtoResponse> readAll() {
         return authorService.readAll();
     }
 
     @Override
-    public AuthorDtoResponse readById(Long id) {
+    @CommandHandler(operation = 7)
+    public AuthorDtoResponse readById(@CommandParam(name = "id") Long id) {
         return authorService.readById(id);
     }
 
     @Override
-    public AuthorDtoResponse create(AuthorDtoRequest createRequest) {
-        return authorService.create(createRequest);
+    @CommandHandler(operation = 8)
+    public AuthorDtoResponse create(@CommandBody AuthorDtoRequest dtoRequest) {
+        return authorService.create(dtoRequest);
     }
 
     @Override
-    public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
-        return authorService.update(updateRequest);
+    @CommandHandler(operation = 9)
+    public AuthorDtoResponse update(@CommandBody AuthorDtoRequest dtoRequest) {
+        return authorService.update(dtoRequest);
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    @CommandHandler(operation = 10)
+    public boolean deleteById(@CommandParam(name = "id") Long id) {
         return authorService.deleteById(id);
     }
 }
