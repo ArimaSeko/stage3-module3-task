@@ -1,58 +1,64 @@
 package com.mjc.school.repository.model;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.LastModifiedDate;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name="news")
-@NoArgsConstructor
-@AllArgsConstructor
-public class News  implements BaseEntity <Long>{
+@Table(name = "news")
+public class News implements BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", nullable = false)
     private Long id;
-    @Column(name="title", nullable = false)
-    private String title;
-    @Column(name="content", nullable = false)
-    private String content;
-    @Column(name="create_date", nullable = false)
-    private LocalDateTime createDate;
-    @LastModifiedDate
-    @Column(name="last_update_time", nullable = false)
-    private LocalDateTime lastUpdateTime;
-    @Column(name="author_id", nullable = true)
-    private Long authorId;
 
-    @ManyToMany
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    @Column(name = "content", columnDefinition = "TEXT", nullable = false)
+    private String content;
+
+    @Column(name = "create_date", nullable = false)
+    private LocalDateTime createDate;
+
+    @Column(name = "last_update_date", nullable = false)
+    private LocalDateTime lastUpdateDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private Author author;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "news_tag",
-            joinColumns = @JoinColumn(name = "news_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    private Set<Tag> tags;
-    public LocalDateTime getCreateDate() {
-        return createDate;
+            name = "news_tags",
+            joinColumns = { @JoinColumn(name = "news_id")},
+            inverseJoinColumns = { @JoinColumn(name = "tag_id")})
+    private Set<Tag> tags = new HashSet<>();
+
+    public News() {
     }
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-    public LocalDateTime getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-    public void setLastUpdateTime(LocalDateTime lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-    public String getContent() {
-        return content;
-    }
-    public void setContent(String content) {
+
+    public News(Long id, String title, String content, LocalDateTime createDate, LocalDateTime lastUpdateDate, Author author, Set<Tag> tags) {
+        this.id = id;
+        this.title = title;
         this.content = content;
+        this.createDate = createDate;
+        this.lastUpdateDate = lastUpdateDate;
+        this.author = author;
+        this.tags = tags;
     }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -60,19 +66,57 @@ public class News  implements BaseEntity <Long>{
     public void setTitle(String title) {
         this.title = title;
     }
-    public Long getAuthorId() {
-        return authorId;
+
+    public String getContent() {
+        return content;
     }
-    public void setAuthorId(Long author) {
-        this.authorId = author;
+
+    public void setContent(String content) {
+        this.content = content;
     }
-    @Override
-    public Long getId() {
-        return this.id;
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+
+    public LocalDateTime getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 
     @Override
-    public void setId(Long id) {
-    this.id=id;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        News news = (News) o;
+        return id.equals(news.id) && title.equals(news.title) && content.equals(news.content) && createDate.equals(news.createDate) && lastUpdateDate.equals(news.lastUpdateDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, content, createDate, lastUpdateDate);
     }
 }

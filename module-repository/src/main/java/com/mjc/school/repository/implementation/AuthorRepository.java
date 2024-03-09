@@ -2,72 +2,56 @@ package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.model.Author;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mjc.school.repository.model.News;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.List;
-import java.util.Optional;
-@Repository("authorRepository")
+import java.util.*;
+
+@Repository
 public class AuthorRepository implements BaseRepository<Author, Long> {
+
     @PersistenceContext
     private EntityManager entityManager;
 
-
     @Override
     public List<Author> readAll() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Author> cq = cb.createQuery(Author.class);
-        Root<Author> authors = cq.from(Author.class);
-        cq.select(authors);
-        Query query = entityManager.createQuery(cq);
-        return query.getResultList();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Author> criteriaQuery = criteriaBuilder.createQuery(Author.class);
+        Root<Author> root = criteriaQuery.from(Author.class);
+        return entityManager.createQuery(criteriaQuery.select(root)).getResultList();
     }
 
     @Override
     public Optional<Author> readById(Long id) {
-        Author author =(Author) entityManager.createNativeQuery("select * from Author where id=:id", Author.class)
-                .setParameter("id", id).getSingleResult();
-
-        return Optional.ofNullable(author);
+        return Optional.of(entityManager.getReference(Author.class, id));
     }
 
     @Override
     public Author create(Author entity) {
-        entityManager.getTransaction().begin();
         entityManager.persist(entity);
-        entityManager.getTransaction().commit();
-        return  entity;
-    }
-
-    @Override
-    public Author update(Author entity) {
-        entityManager.getTransaction().begin();
-        Optional<Author> authorOptional= readById(entity.getId());
-        if (authorOptional.isEmpty()) {
-            return null;
-        }
-        Author author = authorOptional.get();
-        author.setName(entity.getName());
-        author.setLastUpdateTime(entity.getLastUpdateTime());
-        author.setCreateDate(entity.getCreateDate());
-        entityManager.getTransaction().commit();
         return entity;
     }
 
     @Override
+    public Author update(Author entity) {
+        if(existById(entity.getId())) {
+            Author author = entityManager.find(Author.class, entity.getId());
+            author.setName(entity.getName());
+            author.setLastUpdateDate(entity.getLastUpdateDate());
+            return author;
+        }
+        return null;
+    }
+
+    @Override
     public boolean deleteById(Long id) {
-        if (existById(id)) {
-            entityManager.getTransaction().begin();
-            Author author = readById(id).get();
-            entityManager.remove(author);
-            entityManager.getTransaction().commit();
+        if(existById(id)) {
+            entityManager.remove(entityManager.find(Author.class, id));
             return true;
         }
         return false;
@@ -75,6 +59,18 @@ public class AuthorRepository implements BaseRepository<Author, Long> {
 
     @Override
     public boolean existById(Long id) {
-        return readById(id) != null;
+        return entityManager.find(Author.class, id) != null;
+    }
+
+    public List<News> getNewsByAuthorName(String name) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        Set<News> news = new HashSet<>();
+        CriteriaQuery<Author> criteriaQuery = criteriaBuilder.createQuery(Author.class);
+        Root<Author> root = criteriaQuery.from(Author.class);
+        List<Author> authors = entityManager.createQuery(criteriaQuery.select(root).where(criteriaBuilder.like(root.get("name"), name))).getResultList();
+        for (Author author : authors) {
+            news.addAll(author.getNews());
+        }
+        return new ArrayList<>(news);
     }
 }

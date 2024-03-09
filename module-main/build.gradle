@@ -1,17 +1,15 @@
 plugins {
-    id 'java'
     id 'application'
 }
+
 mainClassName = 'com.mjc.school.Main'
 
-group = 'com.mjc.school'
-
-repositories {
-    mavenCentral()
+dependencies {
+    implementation project(':module-web')
+    implementation project(':module-service')
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.3'
 }
 
-dependencies {
-    implementation project(path: ':module-web')
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.2'
-
+run {
+    standardInput = System.in
 }

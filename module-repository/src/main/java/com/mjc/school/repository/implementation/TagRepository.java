@@ -1,68 +1,56 @@
 package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.BaseRepository;
+import com.mjc.school.repository.model.News;
 import com.mjc.school.repository.model.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-@Repository("tagRepository")
-public class TagRepository implements BaseRepository <Tag, Long> {
+@Repository
+public class TagRepository implements BaseRepository<Tag, Long> {
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public List<Tag> readAll() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery <Tag> cq = cb.createQuery(Tag.class);
-        Root<Tag> tagRoot = cq.from(Tag.class);
-        cq.select(tagRoot);
-        Query query = entityManager.createQuery(cq);
-        return query.getResultList();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Tag> criteriaQuery = criteriaBuilder.createQuery(Tag.class);
+        Root<Tag> root = criteriaQuery.from(Tag.class);
+        return entityManager.createQuery(criteriaQuery.select(root)).getResultList();
     }
 
     @Override
     public Optional<Tag> readById(Long id) {
-        return Optional.ofNullable(entityManager.find(Tag.class, id));
+        Tag tag = entityManager.getReference(Tag.class, id);
+        return Optional.of(tag);
     }
 
     @Override
     public Tag create(Tag entity) {
-        entityManager.getTransaction().begin();
         entityManager.persist(entity);
-        entityManager.getTransaction().commit();
         return entity;
     }
 
     @Override
     public Tag update(Tag entity) {
-        entityManager.getTransaction().begin();
-        Optional<Tag> tagOptional = readById(entity.getId());
-        if (tagOptional.isEmpty()) {
-            return null;
+        if(existById(entity.getId())) {
+            Tag tag = entityManager.find(Tag.class, entity.getId());
+            tag.setName(entity.getName());
+            return tag;
         }
-        Tag tag = tagOptional.get();
-        tag.setName(entity.getName());
-        entityManager.getTransaction().commit();
-        return entity;
+        return null;
     }
 
     @Override
     public boolean deleteById(Long id) {
-        if (existById(id)) {
-            entityManager.getTransaction().begin();
-            Tag tag = readById(id).get();
-            entityManager.remove(tag);
-            entityManager.getTransaction().commit();
+        if(existById(id)) {
+            entityManager.remove(entityManager.find(Tag.class, id));
             return true;
         }
         return false;
@@ -70,6 +58,23 @@ public class TagRepository implements BaseRepository <Tag, Long> {
 
     @Override
     public boolean existById(Long id) {
-        return readById(id)!=null;
+        return entityManager.find(Tag.class, id) != null;
+    }
+
+    public List<News> getNewsByTagId(Long id) {
+        List<News> news = new ArrayList<>(entityManager.find(Tag.class, id).getNews());
+        return news;
+    }
+
+    public List<News> getNewsByTagName(String name) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        Set<News> news = new HashSet<>();
+        CriteriaQuery<Tag> criteriaQuery = criteriaBuilder.createQuery(Tag.class);
+        Root<Tag> root = criteriaQuery.from(Tag.class);
+        List<Tag> tags = entityManager.createQuery(criteriaQuery.select(root).where(criteriaBuilder.like(root.get("name"), name))).getResultList();
+        for (Tag tag : tags) {
+            news.addAll(tag.getNews());
+        }
+        return new ArrayList<>(news);
     }
 }

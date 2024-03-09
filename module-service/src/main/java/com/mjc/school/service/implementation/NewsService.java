@@ -1,91 +1,114 @@
 package com.mjc.school.service.implementation;
 
-import com.mjc.school.repository.BaseByTag;
 import com.mjc.school.repository.BaseRepository;
-import com.mjc.school.service.BaseByTagService;
+import com.mjc.school.repository.implementation.AuthorRepository;
+import com.mjc.school.repository.implementation.NewsRepository;
+import com.mjc.school.repository.implementation.TagRepository;
+import com.mjc.school.repository.model.Author;
+import com.mjc.school.repository.model.News;
+import com.mjc.school.repository.model.Tag;
 import com.mjc.school.service.BaseService;
+import com.mjc.school.service.annotations.Valid;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
+import com.mjc.school.service.dto.ParametersDtoRequest;
 import com.mjc.school.service.exceptions.NotFoundException;
-import com.mjc.school.service.mappers.NewsMapper;
-import com.mjc.school.repository.model.News;
-import org.mapstruct.factory.Mappers;
+import com.mjc.school.service.mapper.NewsDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import static com.mjc.school.service.exceptions.ServiceErrorCode.NEWS_ID_DOES_NOT_EXIST;
+import static com.mjc.school.service.exceptions.ExceptionErrorCodes.NEWS_DOES_NOT_EXIST;
 
-@Service("newsService")
-public class NewsService implements BaseService <NewsDtoRequest, NewsDtoResponse, Long>, BaseByTagService <NewsDtoResponse, Long> {
+@Service
+@Transactional
+public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse, Long> {
+    private final BaseRepository<News, Long> newsRepository;
+    private final BaseRepository<Author, Long> authorRepository;
+    private final BaseRepository<Tag, Long> tagRepository;
+    private final NewsDtoMapper newsDtoMapper;
 
-    @Qualifier("newsRepository")
-    private final BaseRepository <News, Long> newsRepository;
-    @Qualifier("newsRepository")
-    private final BaseByTag<News, Long> byTagRepository;
-
-
-    public NewsService(BaseRepository<News, Long> newRepository, BaseByTag<News, Long> byTagRepository) {
-        this.newsRepository = newRepository;
-        this.byTagRepository = byTagRepository;
+    @Autowired
+    public NewsService(BaseRepository<News, Long> newsRepository, BaseRepository<Author, Long> authorRepository, BaseRepository<Tag, Long> tagRepository, NewsDtoMapper newsDtoMapper) {
+        this.newsRepository = newsRepository;
+        this.authorRepository = authorRepository;
+        this.tagRepository = tagRepository;
+        this.newsDtoMapper = newsDtoMapper;
     }
 
-    NewsMapper newsMapper = Mappers.getMapper(NewsMapper.class);
+
     @Override
     public List<NewsDtoResponse> readAll() {
-        return newsMapper.modelListToDtoList( newsRepository.readAll());
+        return newsDtoMapper.modelListToDtoList(newsRepository.readAll());
     }
 
     @Override
-    public NewsDtoResponse readById(Long id) {
-        return newsRepository
-                .readById(id)
-                .map(newsMapper::newsToDto)
-                .orElseThrow(
-                        () -> new NotFoundException(String.format(NEWS_ID_DOES_NOT_EXIST.getMessage(), id)));
+    public NewsDtoResponse readById(@Valid Long id) {
+        if(newsRepository.existById(id)){
+            News news = newsRepository.readById(id).get();
+            return newsDtoMapper.modelToDto(news);
+        }
+        else {
+            throw new NotFoundException(String.format(NEWS_DOES_NOT_EXIST.getErrorMessage(), id));
+        }
     }
 
     @Override
-    public NewsDtoResponse create(NewsDtoRequest createRequest) {
-        News newsRQ =newsMapper.dtoToModel(createRequest);
-        News newsRP = newsRepository.create(newsRQ);
-        return newsMapper.newsToDto(newsRP);
+    public NewsDtoResponse create(@Valid NewsDtoRequest createRequest) {
+        News model = newsDtoMapper.dtoToModel(createRequest);
+        LocalDateTime date = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+        model.setCreateDate(date);
+        model.setLastUpdateDate(date);
+
+        return newsDtoMapper.modelToDto(newsRepository.create(model));
     }
 
     @Override
-    public NewsDtoResponse update(NewsDtoRequest updateRequest) {
-        return null;
+    public NewsDtoResponse update(@Valid NewsDtoRequest updateRequest) {
+        if(newsRepository.existById(updateRequest.id())){
+            News news = newsDtoMapper.dtoToModel(updateRequest);
+            news.setLastUpdateDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+            news.setAuthor(authorRepository.readById(updateRequest.authorId()).get());
+            return newsDtoMapper.modelToDto(newsRepository.update(news));
+        }
+        else {
+            throw new NotFoundException(String.format(NEWS_DOES_NOT_EXIST.getErrorMessage(), updateRequest.id()));
+        }
     }
 
     @Override
-    public boolean deleteById(Long id) {
-        return false;
+    public boolean deleteById(@Valid Long id) {
+        if(newsRepository.existById(id)){
+            return newsRepository.deleteById(id);
+        }
+        else {
+            throw new NotFoundException(String.format(NEWS_DOES_NOT_EXIST.getErrorMessage(), id));
+        }
     }
 
-    @Override
-    public List<NewsDtoResponse>  byTagName(String name) {
-        return newsMapper.modelListToDtoList(byTagRepository.byTagName(name));
-    }
-
-    @Override
-    public List<NewsDtoResponse>  byTagId(Long id) {
-        return newsMapper.modelListToDtoList(byTagRepository.byTagId(id));
-    }
-
-    @Override
-    public List<NewsDtoResponse>  byAuthorName(String authorName) {
-        return newsMapper.modelListToDtoList(byTagRepository.byAuthorName(authorName));
-    }
-
-    @Override
-    public NewsDtoResponse byTitle(String title) {
-        return newsMapper.newsToDto(byTagRepository.byTitle(title));
-    }
-
-    @Override
-    public NewsDtoResponse byContent(String content) {
-        return newsMapper.newsToDto(byTagRepository.byContent(content));
+    public List<NewsDtoResponse> getNewsByParameters(@Valid ParametersDtoRequest parametersDtoRequest) {
+        Set<NewsDtoResponse> news = new HashSet<>();
+        if(parametersDtoRequest.tagId() != null) {
+            news.addAll(newsDtoMapper.modelListToDtoList(((TagRepository) tagRepository).getNewsByTagId(parametersDtoRequest.tagId())));
+        }
+        if(!parametersDtoRequest.tagName().isEmpty()) {
+            news.addAll(newsDtoMapper.modelListToDtoList(((TagRepository) tagRepository).getNewsByTagName(parametersDtoRequest.tagName())));
+        }
+        if(!parametersDtoRequest.authorName().isEmpty()) {
+            news.addAll(newsDtoMapper.modelListToDtoList(((AuthorRepository) authorRepository).getNewsByAuthorName(parametersDtoRequest.authorName())));
+        }
+        if(!parametersDtoRequest.newsTitle().isEmpty()) {
+            news.addAll(newsDtoMapper.modelListToDtoList(((NewsRepository) newsRepository).getNewsByTitle(parametersDtoRequest.newsTitle())));
+        }
+        if(!parametersDtoRequest.newsContent().isEmpty()) {
+            news.addAll(newsDtoMapper.modelListToDtoList(((NewsRepository) newsRepository).getNewsByContent(parametersDtoRequest.newsContent())));
+        }
+        return news.stream().toList();
     }
 }

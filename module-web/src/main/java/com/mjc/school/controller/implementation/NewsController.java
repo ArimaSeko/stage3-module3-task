@@ -1,89 +1,61 @@
 package com.mjc.school.controller.implementation;
 
-import com.mjc.school.controller.BaseByTagController;
 import com.mjc.school.controller.BaseController;
-import com.mjc.school.controller.annotation.CommandBody;
-import com.mjc.school.controller.annotation.CommandHandler;
-import com.mjc.school.controller.annotation.CommandParam;
-import com.mjc.school.service.BaseByTagService;
+import com.mjc.school.controller.annotations.CommandBody;
+import com.mjc.school.controller.annotations.CommandHandler;
+import com.mjc.school.controller.annotations.CommandParam;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
+import com.mjc.school.service.dto.ParametersDtoRequest;
 import com.mjc.school.service.implementation.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
-public class NewsController implements BaseController <NewsDtoRequest, NewsDtoResponse, Long>, BaseByTagController <NewsDtoResponse, Long> {
-
+public class NewsController implements BaseController<NewsDtoRequest, NewsDtoResponse, Long> {
     private final BaseService<NewsDtoRequest, NewsDtoResponse, Long> newsService;
-    private final BaseByTagService<NewsDtoResponse, Long> byTagService;
+
     @Autowired
-    public NewsController(NewsService newsService, BaseByTagService<NewsDtoResponse, Long> byTagService) {
+    public NewsController(BaseService<NewsDtoRequest, NewsDtoResponse, Long> newsService) {
         this.newsService = newsService;
-        this.byTagService = byTagService;
     }
 
     @Override
-    @CommandHandler(operation = 1)
+    @CommandHandler(operationNumber = 1)
     public List<NewsDtoResponse> readAll() {
         return newsService.readAll();
     }
 
     @Override
-    @CommandHandler(operation = 2)
+    @CommandHandler(operationNumber = 2)
     public NewsDtoResponse readById(@CommandParam(name = "id") Long id) {
         return newsService.readById(id);
     }
 
     @Override
-    @CommandHandler(operation = 3)
-    public NewsDtoResponse create(@CommandBody NewsDtoRequest dtoRequest) {
-        return newsService.create(dtoRequest);
+    @CommandHandler(operationNumber = 3)
+    public NewsDtoResponse create(@CommandBody NewsDtoRequest createRequest) {
+        return newsService.create(createRequest);
     }
 
     @Override
-    @CommandHandler(operation = 4)
-    public NewsDtoResponse update(@CommandBody NewsDtoRequest dtoRequest) {
-        return newsService.update(dtoRequest);
+    @CommandHandler(operationNumber = 4)
+    public NewsDtoResponse update(@CommandBody NewsDtoRequest updateRequest) {
+        return newsService.update(updateRequest);
     }
 
     @Override
-    @CommandHandler(operation = 5)
+    @CommandHandler(operationNumber = 5)
     public boolean deleteById(@CommandParam(name = "id") Long id) {
         return newsService.deleteById(id);
     }
 
-    @Override
-    @CommandHandler(operation = 16)
-    public List<NewsDtoResponse>  byTagName(String name) {
-        return byTagService.byTagName(name);
-    }
-
-    @Override
-    @CommandHandler(operation = 17)
-    public List<NewsDtoResponse> byTagId(Long id) {
-        return byTagService.byTagId(id);
-    }
-
-    @Override
-    @CommandHandler(operation = 18)
-    public List<NewsDtoResponse>  byAuthorName(String authorName) {
-        return byTagService.byAuthorName(authorName);
-    }
-
-    @Override
-    @CommandHandler(operation = 19)
-    public NewsDtoResponse byTitle(String title) {
-        return byTagService.byTitle(title);
-    }
-
-    @Override
-    @CommandHandler(operation = 20)
-    public NewsDtoResponse byContent(String content) {
-        return byTagService.byContent(content);
+    @CommandHandler(operationNumber = 18)
+    public List<NewsDtoResponse> getNewsByParameters(@CommandBody ParametersDtoRequest parametersDtoRequest) {
+        return ((NewsService)newsService).getNewsByParameters(parametersDtoRequest);
     }
 }
