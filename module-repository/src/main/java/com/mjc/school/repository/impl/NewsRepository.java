@@ -15,6 +15,10 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,14 +36,12 @@ public class NewsRepository implements BaseRepository <News, Long>, BaseByTagRep
     }
     @Override
     public List<News> readAll() {
-        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        List<News> newsList = session.createQuery("from News", News.class).getResultList();
-        transaction.commit();
-        session.close();
-        sessionFactory.close();
-        return newsList;
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<News> cq = cb.createQuery(News.class);
+        Root<News> news = cq.from(News.class);
+        cq.select(news);
+        Query query = entityManager.createQuery(cq);
+        return query.getResultList();
     }
 
     @Override
