@@ -1,13 +1,12 @@
-package com.mjc.school.impl;
+package com.mjc.school.service.impl;
 
 import com.mjc.school.BaseRepository;
-import com.mjc.school.BaseService;
-import com.mjc.school.dto.TagDtoRequest;
-import com.mjc.school.dto.TagDtoResponse;
-import com.mjc.school.exceptions.NotFoundException;
-import com.mjc.school.mappers.TagMapper;
+import com.mjc.school.service.BaseService;
+import com.mjc.school.service.dto.TagDtoRequest;
+import com.mjc.school.service.dto.TagDtoResponse;
+import com.mjc.school.service.exceptions.NotFoundException;
+import com.mjc.school.service.mappers.TagMapper;
 import com.mjc.school.model.Tag;
-import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.mjc.school.exceptions.ServiceErrorCode.TAG_ID_DOES_NOT_EXIST;
+import static com.mjc.school.service.exceptions.ServiceErrorCode.TAG_ID_DOES_NOT_EXIST;
 
 @Service
 @Component("tagService")

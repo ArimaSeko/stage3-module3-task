@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -70,8 +71,7 @@ public class News  implements BaseEntity <Long>{
         this.authorId = author;
     }
     @Override
-    public Long getId(
-    ) {
+    public Long getId() {
         return this.id;
     }
 

@@ -1,4 +1,4 @@
-package com.mjc.school.dto;
+package com.mjc.school.service.dto;
 
 import java.time.LocalDateTime;
 

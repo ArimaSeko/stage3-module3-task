@@ -1,11 +1,9 @@
-package com.mjc.school.mappers;
+package com.mjc.school.service.mappers;
 
-import com.mjc.school.dto.AuthorDtoRequest;
-import com.mjc.school.dto.AuthorDtoResponse;
+import com.mjc.school.service.dto.AuthorDtoRequest;
+import com.mjc.school.service.dto.AuthorDtoResponse;
 import com.mjc.school.model.Author;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 import java.util.List;
 

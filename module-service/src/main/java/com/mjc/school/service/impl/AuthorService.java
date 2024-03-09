@@ -1,11 +1,11 @@
-package com.mjc.school.impl;
+package com.mjc.school.service.impl;
 
 import com.mjc.school.BaseRepository;
-import com.mjc.school.BaseService;
-import com.mjc.school.dto.AuthorDtoRequest;
-import com.mjc.school.dto.AuthorDtoResponse;
-import com.mjc.school.exceptions.NotFoundException;
-import com.mjc.school.mappers.AuthorMapper;
+import com.mjc.school.service.BaseService;
+import com.mjc.school.service.dto.AuthorDtoRequest;
+import com.mjc.school.service.dto.AuthorDtoResponse;
+import com.mjc.school.service.exceptions.NotFoundException;
+import com.mjc.school.service.mappers.AuthorMapper;
 import com.mjc.school.model.Author;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.mjc.school.exceptions.ServiceErrorCode.AUTHOR_ID_DOES_NOT_EXIST;
-import static com.mjc.school.exceptions.ServiceErrorCode.NEWS_ID_DOES_NOT_EXIST;
+import static com.mjc.school.service.exceptions.ServiceErrorCode.AUTHOR_ID_DOES_NOT_EXIST;
 
 @Service
 @Component("authorService")

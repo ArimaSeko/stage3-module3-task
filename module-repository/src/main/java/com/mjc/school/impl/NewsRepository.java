@@ -1,22 +1,20 @@
 package com.mjc.school.impl;
 
+import com.mjc.school.BaseByTagRepository;
 import com.mjc.school.BaseRepository;
 import com.mjc.school.model.Author;
 import com.mjc.school.model.News;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.mjc.school.model.Tag;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -25,7 +23,7 @@ import java.util.Optional;
 
 @Repository
 @Component("newsRepository")
-public class NewsRepository implements BaseRepository <News, Long>{
+public class NewsRepository implements BaseRepository <News, Long>, BaseByTagRepository <News, Long> {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
@@ -49,12 +47,7 @@ public class NewsRepository implements BaseRepository <News, Long>{
 
     @Override
     public Optional<News> readById(Long id) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<News> cq = cb.createQuery(News.class);
-        Root<News> newsRoot = cq.from(News.class);
-        cq.select(newsRoot).where(cb.equal(newsRoot.get("id"), id));
-        News newsResult = entityManager.createQuery(cq).getSingleResult();
-        return Optional.ofNullable(newsResult);
+        return Optional.ofNullable(entityManager.find(News.class, id));
     }
 
     @Override
@@ -97,5 +90,43 @@ public class NewsRepository implements BaseRepository <News, Long>{
     @Override
     public boolean existById(Long id) {
         return readById(id)!=null;
+    }
+
+    @Override
+    public List<News> byTagName(String name) {
+        Tag tag =(Tag)entityManager.createNativeQuery("SELECT * FROM tag WHERE name LIKE :name", Tag.class)
+                .setParameter("name", name).getSingleResult();
+
+        return tag.getNews();
+    }
+
+    @Override
+    public List<News> byTagId(Long id) {
+        Tag tag =(Tag)entityManager.createNativeQuery("SELECT * FROM tag WHERE id=:id", Tag.class)
+                .setParameter("id", id).getSingleResult();
+        return tag.getNews();
+    }
+
+    @Override
+    public List<News> byAuthorName(String name) {
+        Author author =(Author) entityManager.createNativeQuery("select * from Author WHERE name LIKE :name", Author.class)
+                .setParameter("name", name).getSingleResult();
+        List<News> newsList =entityManager.createNativeQuery("SELECT * FROM news WHERE ID="+author.getId(), News.class)
+                .setParameter("id", author.getId()).getResultList();
+        return newsList;
+    }
+
+    @Override
+    public News byTitle(String title) {
+        News news = (News) entityManager.createNativeQuery("SELECT * FROM news WHERE title like '%"+title+"%'", News.class)
+                .setParameter("title", title).getSingleResult();
+        return news;
+    }
+
+    @Override
+    public News byContent(String content) {
+        News news = (News) entityManager.createNativeQuery("SELECT * FROM news WHERE content like '%"+content+"%'", News.class)
+                .setParameter("content", content).getSingleResult();
+        return news;
     }
 }

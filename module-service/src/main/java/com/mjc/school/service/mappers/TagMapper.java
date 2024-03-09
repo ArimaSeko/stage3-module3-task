@@ -1,9 +1,7 @@
-package com.mjc.school.mappers;
+package com.mjc.school.service.mappers;
 
-import com.mjc.school.dto.NewsDtoResponse;
-import com.mjc.school.dto.TagDtoRequest;
-import com.mjc.school.dto.TagDtoResponse;
-import com.mjc.school.model.News;
+import com.mjc.school.service.dto.TagDtoRequest;
+import com.mjc.school.service.dto.TagDtoResponse;
 import com.mjc.school.model.Tag;
 import org.mapstruct.Mapper;
 

@@ -24,6 +24,10 @@ public class Tag implements BaseEntity <Long>{
         return id;
     }
 
+    public List<News> getNews() {
+        return news;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
