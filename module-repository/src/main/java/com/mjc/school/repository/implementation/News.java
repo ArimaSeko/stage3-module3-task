@@ -1,16 +1,11 @@
-package com.mjc.school.repository.impl;
+package com.mjc.school.repository.implementation;
 
-import com.mjc.school.repository.BaseByTagRepository;
-import com.mjc.school.repository.BaseRepository;
+import com.mjc.school.repository.BaseByTag;
 import com.mjc.school.repository.model.Author;
-import com.mjc.school.repository.model.News;
 import com.mjc.school.repository.model.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -20,34 +15,29 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository("newsRepository")
-public class NewsRepository implements BaseByTagRepository<News, Long> {
+public class News implements BaseByTag<com.mjc.school.repository.model.News, Long> {
 
-    private EntityManagerFactory entityManagerFactory;
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
-    public NewsRepository(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
-        this.entityManager = this.entityManagerFactory.createEntityManager();
-    }
+
     @Override
-    public List<News> readAll() {
+    public List<com.mjc.school.repository.model.News> readAll() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<News> cq = cb.createQuery(News.class);
-        Root<News> news = cq.from(News.class);
+        CriteriaQuery<com.mjc.school.repository.model.News> cq = cb.createQuery(com.mjc.school.repository.model.News.class);
+        Root<com.mjc.school.repository.model.News> news = cq.from(com.mjc.school.repository.model.News.class);
         cq.select(news);
         Query query = entityManager.createQuery(cq);
         return query.getResultList();
     }
 
     @Override
-    public Optional<News> readById(Long id) {
-        return Optional.ofNullable(entityManager.find(News.class, id));
+    public Optional<com.mjc.school.repository.model.News> readById(Long id) {
+        return Optional.ofNullable(entityManager.find(com.mjc.school.repository.model.News.class, id));
     }
 
     @Override
-    public News create(News entity) {
+    public com.mjc.school.repository.model.News create(com.mjc.school.repository.model.News entity) {
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
@@ -55,13 +45,13 @@ public class NewsRepository implements BaseByTagRepository<News, Long> {
     }
 
     @Override
-    public News update(News entity) {
+    public com.mjc.school.repository.model.News update(com.mjc.school.repository.model.News entity) {
         entityManager.getTransaction().begin();
-        Optional<News> newsOptional= readById(entity.getId());
+        Optional<com.mjc.school.repository.model.News> newsOptional= readById(entity.getId());
         if (newsOptional.isEmpty()) {
             return null;
         }
-        News news = newsOptional.get();
+        com.mjc.school.repository.model.News news = newsOptional.get();
         news.setContent(entity.getContent());
         news.setTitle(entity.getTitle());
         news.setAuthorId(entity.getAuthorId());
@@ -75,7 +65,7 @@ public class NewsRepository implements BaseByTagRepository<News, Long> {
     public boolean deleteById(Long id) {
         if (existById(id)) {
             entityManager.getTransaction().begin();
-            News news = readById(id).get();
+            com.mjc.school.repository.model.News news = readById(id).get();
             entityManager.remove(news);
             entityManager.getTransaction().commit();
             return true;
@@ -89,7 +79,7 @@ public class NewsRepository implements BaseByTagRepository<News, Long> {
     }
 
     @Override
-    public List<News> byTagName(String name) {
+    public List<com.mjc.school.repository.model.News> byTagName(String name) {
         Tag tag =(Tag)entityManager.createNativeQuery("SELECT * FROM tag WHERE name LIKE :name", Tag.class)
                 .setParameter("name", name).getSingleResult();
 
@@ -97,31 +87,31 @@ public class NewsRepository implements BaseByTagRepository<News, Long> {
     }
 
     @Override
-    public List<News> byTagId(Long id) {
+    public List<com.mjc.school.repository.model.News> byTagId(Long id) {
         Tag tag =(Tag)entityManager.createNativeQuery("SELECT * FROM tag WHERE id=:id", Tag.class)
                 .setParameter("id", id).getSingleResult();
         return tag.getNews();
     }
 
     @Override
-    public List<News> byAuthorName(String name) {
+    public List<com.mjc.school.repository.model.News> byAuthorName(String name) {
         Author author =(Author) entityManager.createNativeQuery("select * from Author WHERE name LIKE :name", Author.class)
                 .setParameter("name", name).getSingleResult();
-        List<News> newsList =entityManager.createNativeQuery("SELECT * FROM news WHERE ID="+author.getId(), News.class)
+        List<com.mjc.school.repository.model.News> newsList =entityManager.createNativeQuery("SELECT * FROM news WHERE ID="+author.getId(), com.mjc.school.repository.model.News.class)
                 .setParameter("id", author.getId()).getResultList();
         return newsList;
     }
 
     @Override
-    public News byTitle(String title) {
-        News news = (News) entityManager.createNativeQuery("SELECT * FROM news WHERE title like '%"+title+"%'", News.class)
+    public com.mjc.school.repository.model.News byTitle(String title) {
+        com.mjc.school.repository.model.News news = (com.mjc.school.repository.model.News) entityManager.createNativeQuery("SELECT * FROM news WHERE title like '%"+title+"%'", com.mjc.school.repository.model.News.class)
                 .setParameter("title", title).getSingleResult();
         return news;
     }
 
     @Override
-    public News byContent(String content) {
-        News news = (News) entityManager.createNativeQuery("SELECT * FROM news WHERE content like '%"+content+"%'", News.class)
+    public com.mjc.school.repository.model.News byContent(String content) {
+        com.mjc.school.repository.model.News news = (com.mjc.school.repository.model.News) entityManager.createNativeQuery("SELECT * FROM news WHERE content like '%"+content+"%'", com.mjc.school.repository.model.News.class)
                 .setParameter("content", content).getSingleResult();
         return news;
     }

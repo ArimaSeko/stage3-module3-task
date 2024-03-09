@@ -1,18 +1,5 @@
-plugins {
-    id 'java'
-}
 
-group = 'com.mjc.school'
-version = 'unspecified'
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     implementation project(path: ':module-service')
-}
-
-test {
-    useJUnitPlatform()
 }

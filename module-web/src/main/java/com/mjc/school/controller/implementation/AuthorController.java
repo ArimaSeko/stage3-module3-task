@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-@Component("authorController")
 public class AuthorController implements BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> {
     @Qualifier("authorService")
     private BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> authorService;

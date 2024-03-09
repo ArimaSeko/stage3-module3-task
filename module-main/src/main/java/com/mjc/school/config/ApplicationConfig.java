@@ -10,7 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.sql.DataSource;
 
-@Configuration(proxyBeanMethods = false)
+@Configuration
 @ComponentScan(basePackages = "com.mjc.school")
 public class ApplicationConfig {
     @Bean

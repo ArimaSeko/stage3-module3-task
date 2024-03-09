@@ -1,17 +1,4 @@
-plugins {
-    id 'java'
-}
 
-group = 'com.mjc.school'
-version = 'unspecified'
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
-}
-
-test {
-    useJUnitPlatform()
 }

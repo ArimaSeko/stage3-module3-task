@@ -10,6 +10,7 @@ subprojects {
     group = 'com.mjc.school'
     apply plugin: 'java'
     apply plugin: 'jacoco'
+
     sourceCompatibility = javaVersion
     targetCompatibility = javaVersion
     repositories {

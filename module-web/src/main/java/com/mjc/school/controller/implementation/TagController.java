@@ -6,14 +6,13 @@ import com.mjc.school.controller.annotation.CommandHandler;
 import com.mjc.school.controller.annotation.CommandParam;
 import com.mjc.school.service.dto.TagDtoRequest;
 import com.mjc.school.service.dto.TagDtoResponse;
-import com.mjc.school.service.impl.TagService;
+import com.mjc.school.service.implementation.TagService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 @Controller
-@Component("tagController")
 public class TagController implements BaseController <TagDtoRequest, TagDtoResponse, Long> {
     @Qualifier("tagService")
     private final TagService tagService;

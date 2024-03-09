@@ -1,4 +1,4 @@
-package com.mjc.school.service.impl;
+package com.mjc.school.service.implementation;
 
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.service.BaseService;
@@ -8,8 +8,7 @@ import com.mjc.school.service.exceptions.NotFoundException;
 import com.mjc.school.service.mappers.TagMapper;
 import com.mjc.school.repository.model.Tag;
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +17,11 @@ import static com.mjc.school.service.exceptions.ServiceErrorCode.TAG_ID_DOES_NOT
 
 @Service("tagService")
 public class TagService implements BaseService <TagDtoRequest, TagDtoResponse, Long> {
-
-    BaseRepository <Tag, Long> tagRepository;
+    @Qualifier("tagRepository")
+    private final BaseRepository <Tag, Long> tagRepository;
 
     TagMapper mapper = Mappers.getMapper(TagMapper.class);
-    @Autowired
+
     public TagService(BaseRepository<Tag, Long> tagRepository) {
         this.tagRepository = tagRepository;
     }

@@ -1,9 +1,8 @@
-package com.mjc.school.repository.impl;
+package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -17,15 +16,10 @@ import java.util.List;
 import java.util.Optional;
 @Repository("authorRepository")
 public class AuthorRepository implements BaseRepository<Author, Long> {
-    private EntityManagerFactory entityManagerFactory;
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
-    public AuthorRepository(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
-        this.entityManager = this.entityManagerFactory.createEntityManager();
-    }
+
     @Override
     public List<Author> readAll() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();

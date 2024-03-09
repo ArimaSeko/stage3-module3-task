@@ -15,4 +15,9 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="17" />
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="stage3-module3-task.module-service.main" options="--add-exports java.xml/jdk.xml.internal=ALL-UNNAMED" />
+    </option>
+  </component>
 </project>

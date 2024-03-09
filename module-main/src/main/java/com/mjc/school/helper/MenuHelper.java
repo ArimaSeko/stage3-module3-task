@@ -38,7 +38,7 @@ public class MenuHelper {
     operations.put(String.valueOf(GET_NEWS_BY_TAG_ID.getOperationNumber()), this::byTagId);
   }
 
-  public void printMainMenu() {
+  public void printMenu() {
     printStream.println(NUMBER_OPERATION_ENTER);
     for (Operations operation : Operations.values()) {
       printStream.println(operation.getOperationWithNumber());

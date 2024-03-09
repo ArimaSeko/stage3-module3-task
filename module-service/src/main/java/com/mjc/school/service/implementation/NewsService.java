@@ -1,6 +1,6 @@
-package com.mjc.school.service.impl;
+package com.mjc.school.service.implementation;
 
-import com.mjc.school.repository.BaseByTagRepository;
+import com.mjc.school.repository.BaseByTag;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.service.BaseByTagService;
 import com.mjc.school.service.BaseService;
@@ -11,7 +11,7 @@ import com.mjc.school.service.mappers.NewsMapper;
 import com.mjc.school.repository.model.News;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,11 +21,13 @@ import static com.mjc.school.service.exceptions.ServiceErrorCode.NEWS_ID_DOES_NO
 @Service("newsService")
 public class NewsService implements BaseService <NewsDtoRequest, NewsDtoResponse, Long>, BaseByTagService <NewsDtoResponse, Long> {
 
+    @Qualifier("newsRepository")
     private final BaseRepository <News, Long> newsRepository;
-    private final BaseByTagRepository <News, Long> byTagRepository;
+    @Qualifier("newsRepository")
+    private final BaseByTag<News, Long> byTagRepository;
 
-    @Autowired
-    public NewsService(BaseRepository<News, Long> newRepository, BaseByTagRepository<News, Long> byTagRepository) {
+
+    public NewsService(BaseRepository<News, Long> newRepository, BaseByTag<News, Long> byTagRepository) {
         this.newsRepository = newRepository;
         this.byTagRepository = byTagRepository;
     }

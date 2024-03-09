@@ -9,7 +9,7 @@ import com.mjc.school.service.BaseByTagService;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
-import com.mjc.school.service.impl.NewsService;
+import com.mjc.school.service.implementation.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-@Component("newsController")
 public class NewsController implements BaseController <NewsDtoRequest, NewsDtoResponse, Long>, BaseByTagController <NewsDtoResponse, Long> {
 
     private final BaseService<NewsDtoRequest, NewsDtoResponse, Long> newsService;

@@ -1,11 +1,11 @@
 package com.mjc.school;
 
 import com.mjc.school.config.ApplicationConfig;
-import com.mjc.school.controller.implementation.NewsController;
 import com.mjc.school.helper.Command;
 import com.mjc.school.helper.CommandSender;
 import com.mjc.school.helper.MenuHelper;
 import com.mjc.school.helper.Operations;
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -17,12 +17,12 @@ public class Main {
         try (var context = new AnnotationConfigApplicationContext(ApplicationConfig.class)) {
             Scanner keyboard = new Scanner(System.in);
 
-            MenuHelper helper = context.getBean("menuHelper",MenuHelper.class);
-            CommandSender commandSender = context.getBean("commandSender",CommandSender.class);
+            MenuHelper helper = context.getBean(MenuHelper.class);
+            CommandSender commandSender = context.getBean(CommandSender.class);
 
             while (true) {
                 try {
-                    helper.printMainMenu();
+                    helper.printMenu();
                     String key = keyboard.nextLine();
                     if (Integer.toString(Operations.EXIT.getOperationNumber()).equals(key)) {
                         System.exit(0);

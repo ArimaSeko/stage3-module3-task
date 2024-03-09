@@ -1,4 +1,4 @@
-package com.mjc.school.service.impl;
+package com.mjc.school.service.implementation;
 
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.service.BaseService;
@@ -9,7 +9,7 @@ import com.mjc.school.service.mappers.AuthorMapper;
 import com.mjc.school.repository.model.Author;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,9 +19,10 @@ import static com.mjc.school.service.exceptions.ServiceErrorCode.AUTHOR_ID_DOES_
 @Service("authorService")
 public class AuthorService implements BaseService <AuthorDtoRequest, AuthorDtoResponse, Long> {
 
+    @Qualifier("authorRepository")
     private BaseRepository <Author, Long> authorRepository;
 
-    @Autowired
+
     public AuthorService(BaseRepository<Author, Long> authorRepository) {
         this.authorRepository = authorRepository;
     }

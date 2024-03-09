@@ -15,7 +15,3 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.2'
 
 }
-
-test {
-    useJUnitPlatform()
-}
