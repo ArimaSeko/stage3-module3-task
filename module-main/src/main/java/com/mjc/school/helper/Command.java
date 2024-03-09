@@ -1,9 +1,8 @@
 package com.mjc.school.helper;
 
-import static com.mjc.school.helper.Operations.GET_ALL_AUTHORS;
-import static com.mjc.school.helper.Operations.GET_ALL_NEWS;
-
 import java.util.Map;
+
+import static com.mjc.school.helper.Operations.*;
 
 public record Command(
     int operation,
@@ -14,4 +13,5 @@ public record Command(
 
     public static Command GET_NEWS = new Command(GET_ALL_NEWS.getOperationNumber(), null, null);
     public static Command GET_AUTHORS = new Command(GET_ALL_AUTHORS.getOperationNumber(), null, null);
+    public static Command GET_TAGS = new Command(GET_ALL_TAGS.getOperationNumber(), null, null);
 }

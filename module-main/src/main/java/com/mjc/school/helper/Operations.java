@@ -14,6 +14,18 @@ public enum Operations {
   CREATE_AUTHOR(8, "Create author."),
   UPDATE_AUTHOR(9, "Update author."),
   REMOVE_AUTHOR_BY_ID(10, "Remove author by id."),
+  GET_ALL_TAGS(11, "Get all tags."),
+  GET_TAG_BY_ID(12, "Get tag by id."),
+  CREATE_TAG(13, "Create tag."),
+  UPDATE_TAG(14, "Update tag."),
+  REMOVE_TAG_BY_ID(15, "Remove tag by id."),
+
+  GET_NEWS_BY_TAG_NAME(16, "Get news by tag name"),
+  //byTagId  byAuthorName byTitle byContent
+  GET_NEWS_BY_TAG_ID(17, "Get news by tag id"),
+  GET_NEWS_BY_AUTHOR_NAME(18,"Get news by author name"),
+  GET_NEWS_BY_TITLE(19,"Get news by title"),
+  GET_NEWS_BY_CONTENT(20,"Get news by content"),
 
   EXIT(0, "Exit."),
   ;

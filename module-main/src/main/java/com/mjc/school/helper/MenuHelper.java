@@ -1,23 +1,7 @@
 package com.mjc.school.helper;
 
-import static com.mjc.school.helper.Constant.AUTHOR_ID;
-import static com.mjc.school.helper.Constant.AUTHOR_ID_ENTER;
-import static com.mjc.school.helper.Constant.AUTHOR_NAME_ENTER;
-import static com.mjc.school.helper.Constant.NEWS_CONTENT_ENTER;
-import static com.mjc.school.helper.Constant.NEWS_ID;
-import static com.mjc.school.helper.Constant.NEWS_ID_ENTER;
-import static com.mjc.school.helper.Constant.NEWS_TITLE_ENTER;
-import static com.mjc.school.helper.Constant.NUMBER_OPERATION_ENTER;
-import static com.mjc.school.helper.Operations.CREATE_AUTHOR;
-import static com.mjc.school.helper.Operations.CREATE_NEWS;
-import static com.mjc.school.helper.Operations.GET_ALL_AUTHORS;
-import static com.mjc.school.helper.Operations.GET_ALL_NEWS;
-import static com.mjc.school.helper.Operations.GET_AUTHOR_BY_ID;
-import static com.mjc.school.helper.Operations.GET_NEWS_BY_ID;
-import static com.mjc.school.helper.Operations.REMOVE_AUTHOR_BY_ID;
-import static com.mjc.school.helper.Operations.REMOVE_NEWS_BY_ID;
-import static com.mjc.school.helper.Operations.UPDATE_AUTHOR;
-import static com.mjc.school.helper.Operations.UPDATE_NEWS;
+import static com.mjc.school.helper.Constant.*;
+import static com.mjc.school.helper.Operations.*;
 
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -49,7 +33,7 @@ public class MenuHelper {
     operations.put(String.valueOf(CREATE_AUTHOR.getOperationNumber()), this::createAuthor);
     operations.put(String.valueOf(UPDATE_AUTHOR.getOperationNumber()), this::updateAuthor);
     operations.put(String.valueOf(REMOVE_AUTHOR_BY_ID.getOperationNumber()), this::deleteAuthor);
-
+    operations.put(String.valueOf(GET_NEWS_BY_TAG_ID.getOperationNumber()), this::byTagId);
     this.printStream = printStream;
   }
 
@@ -220,6 +204,12 @@ public class MenuHelper {
         REMOVE_AUTHOR_BY_ID.getOperationNumber(),
         Map.of("id", Long.toString(getKeyboardNumber(AUTHOR_ID, keyboard))),
         null);
+  }
+  private Command byTagId(Scanner keyboard){
+    printStream.println(GET_NEWS_BY_TAG_ID.getOperation());
+    printStream.println(TAG_ID_ENTER);
+    return  new Command(GET_NEWS_BY_TAG_ID.getOperationNumber(),
+            Map.of("id", Long.toString(getKeyboardNumber(TAG_ID, keyboard))), null);
   }
 
   private long getKeyboardNumber(String params, Scanner keyboard) {
