@@ -1,7 +1,7 @@
-package com.mjc.school.impl;
+package com.mjc.school.repository.impl;
 
-import com.mjc.school.BaseRepository;
-import com.mjc.school.model.Tag;
+import com.mjc.school.repository.BaseRepository;
+import com.mjc.school.repository.model.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;

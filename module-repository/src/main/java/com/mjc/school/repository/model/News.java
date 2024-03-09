@@ -1,15 +1,11 @@
-package com.mjc.school.model;
+package com.mjc.school.repository.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Entity

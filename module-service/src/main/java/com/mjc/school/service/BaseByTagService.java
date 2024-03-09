@@ -1,7 +1,5 @@
 package com.mjc.school.service;
 
-import com.mjc.school.model.News;
-
 import java.util.List;
 
 public interface BaseByTagService <T, K>{

@@ -1,15 +1,11 @@
-package com.mjc.school.impl;
+package com.mjc.school.repository.impl;
 
-import com.mjc.school.BaseRepository;
-import com.mjc.school.model.Author;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import com.mjc.school.repository.BaseRepository;
+import com.mjc.school.repository.model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import javax.persistence.EntityTransaction;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;

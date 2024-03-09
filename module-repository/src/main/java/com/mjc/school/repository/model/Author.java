@@ -1,12 +1,9 @@
-package com.mjc.school.model;
+package com.mjc.school.repository.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Entity

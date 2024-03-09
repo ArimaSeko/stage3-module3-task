@@ -2,7 +2,7 @@ package com.mjc.school.service.mappers;
 
 import com.mjc.school.service.dto.AuthorDtoRequest;
 import com.mjc.school.service.dto.AuthorDtoResponse;
-import com.mjc.school.model.Author;
+import com.mjc.school.repository.model.Author;
 import org.mapstruct.Mapper;
 
 import java.util.List;

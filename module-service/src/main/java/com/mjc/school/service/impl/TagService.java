@@ -1,12 +1,12 @@
 package com.mjc.school.service.impl;
 
-import com.mjc.school.BaseRepository;
+import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.TagDtoRequest;
 import com.mjc.school.service.dto.TagDtoResponse;
 import com.mjc.school.service.exceptions.NotFoundException;
 import com.mjc.school.service.mappers.TagMapper;
-import com.mjc.school.model.Tag;
+import com.mjc.school.repository.model.Tag;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

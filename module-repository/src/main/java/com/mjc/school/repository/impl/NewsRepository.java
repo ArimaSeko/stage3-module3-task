@@ -1,10 +1,10 @@
-package com.mjc.school.impl;
+package com.mjc.school.repository.impl;
 
-import com.mjc.school.BaseByTagRepository;
-import com.mjc.school.BaseRepository;
-import com.mjc.school.model.Author;
-import com.mjc.school.model.News;
-import com.mjc.school.model.Tag;
+import com.mjc.school.repository.BaseByTagRepository;
+import com.mjc.school.repository.BaseRepository;
+import com.mjc.school.repository.model.Author;
+import com.mjc.school.repository.model.News;
+import com.mjc.school.repository.model.Tag;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,9 +15,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 

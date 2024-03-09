@@ -1,6 +1,4 @@
-package com.mjc.school;
-
-import com.mjc.school.model.News;
+package com.mjc.school.repository;
 
 import java.util.List;
 
