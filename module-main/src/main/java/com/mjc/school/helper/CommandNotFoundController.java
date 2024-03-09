@@ -1,14 +1,16 @@
 package com.mjc.school.helper;
 
-import com.mjc.school.controller.annotations.CommandHandler;
+import static com.mjc.school.helper.Constant.COMMAND_NOT_FOUND;
+
 import org.springframework.stereotype.Controller;
 
-import static com.mjc.school.helper.Constants.COMMAND_NOT_FOUND;
+import com.mjc.school.controller.annotation.CommandHandler;
 
 @Controller
 public class CommandNotFoundController {
-    @CommandHandler(operationNumber = -1)
-    public String commandNotFound() {
-        return COMMAND_NOT_FOUND;
-    }
+
+  @CommandHandler(operation = -1)
+  public String commandNotFound() {
+    return COMMAND_NOT_FOUND;
+  }
 }

@@ -1,4 +1,8 @@
 dependencies {
-    implementation project(':module-repository')
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
 
+    implementation project(':module-repository')
+    implementation "org.mapstruct:mapstruct:$mapstructVersion"
+    implementation "org.aspectj:aspectjrt:$aspectJVersion"
+    implementation "org.aspectj:aspectjweaver:$aspectJVersion"
 }

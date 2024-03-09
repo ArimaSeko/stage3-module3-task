@@ -4,33 +4,89 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b1ee5e9-2cf0-4efc-bd79-82cadfe98eed" name="Changes" comment="14 09\3\2024">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
+    <list default="true" id="8b1ee5e9-2cf0-4efc-bd79-82cadfe98eed" name="Changes" comment="17 09\3\2024">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/config/ApplicationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/helper/Constant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/BaseRepositoryWithNewFunctionality.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/impl/AuthorRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/impl/NewsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/impl/TagRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/model/NewsParams.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/utils/Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-repository/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/BaseServiceWithNewFunctionality.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/aspect/ValidationAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/NewsParamsDtoRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/exceptions/ServiceErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/exceptions/ValidatorException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/impl/AuthorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/impl/NewsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/impl/TagService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/mapper/AuthorMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/mapper/NewsMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/mapper/NewsParamsMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/mapper/TagMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/Valid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/checker/ConstraintChecker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/checker/MaxConstraintChecker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/checker/MinConstraintChecker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/checker/NotNullConstraintChecker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/checker/SizeConstraintChecker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/constraint/Constraint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/constraint/Max.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/constraint/Min.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/constraint/NotNull.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/constraint/Size.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/annotation/CommandBody.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/annotation/CommandHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/annotation/CommandParam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/impl/AuthorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/impl/NewsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-main/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/module-main/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/config/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/helper/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/helper/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/helper/CommandNotFoundController.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/helper/CommandNotFoundController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/helper/CommandSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/helper/CommandSender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/helper/MenuHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/helper/MenuHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/helper/Operations.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-main/src/main/java/com/mjc/school/helper/Operations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-repository/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/BaseByTagRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/BaseByTag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/impl/AuthorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/implementation/AuthorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/impl/NewsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/implementation/News.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/impl/TagRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/implementation/TagRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/BaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/BaseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/implementation/AuthorRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/implementation/TagRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/model/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/model/Author.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/model/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/model/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/model/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/model/News.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/model/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/java/com/mjc/school/repository/model/Tag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-repository/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/module-repository/src/main/resources/META-INF/persistence.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/impl/AuthorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/implementation/AuthorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/impl/NewsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/implementation/NewsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/impl/TagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/implementation/TagService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-web/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/module-web/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/AuthorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/AuthorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/NewsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/NewsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/TagController.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/TagController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/BaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/BaseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/AuthorDtoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/AuthorDtoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/AuthorDtoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/AuthorDtoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/NewsDtoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/NewsDtoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/NewsDtoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/NewsDtoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/TagDtoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/TagDtoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/TagDtoResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/dto/TagDtoResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/exceptions/NotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/exceptions/NotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/implementation/AuthorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/implementation/NewsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/implementation/TagService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/Validator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/ValidatorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-service/src/main/java/com/mjc/school/service/validator/ValidatorImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/BaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/AuthorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/NewsController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/implementation/TagController.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-web/src/main/java/com/mjc/school/controller/impl/TagController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +118,36 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="stage3-module3-task" type="f1a62948:ProjectNode" />
+                <item name="stage3-module2-task" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="stage3-module2-task" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="stage3-module2-task" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="stage3-module2-task" type="f1a62948:ProjectNode" />
+                <item name="module-service" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="stage3-module2-task" type="f1a62948:ProjectNode" />
+                <item name="module-service" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="stage3-module2-task" type="f1a62948:ProjectNode" />
+                <item name="module-service" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -111,33 +196,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;0ba4edb9-169d-4228-8c56-d575f1a40310&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Projects/stage3-module2-task-master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3321839&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;bac4e498150c3caebf19e6be4c3b43da&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JPA.DatabaseSchemaImportDialog": "0ba4edb9-169d-4228-8c56-d575f1a40310",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "jdk.selected.JAVA_MODULE": "corretto-17",
+    "last_opened_file_path": "F:/Projects/stage3-module2-task-master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3321839",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "spring.configuration.checksum": "bac4e498150c3caebf19e6be4c3b43da",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Projects\stage3-module3-task\module-repository\src\main\resources" />
@@ -148,7 +237,19 @@
       <recent name="com.mjc.school" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.stage3-module3-task [testClasses]">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mjc.school.Main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mjc.school.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="stage3-module3-task [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -193,50 +294,6 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="stage3-module3-task [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="jar" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
-      <method v="2" />
-    </configuration>
-    <configuration name="stage3-module3-task [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--info" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="run" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
-      <method v="2" />
-    </configuration>
     <configuration name="stage3-module3-task [testClasses]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -259,13 +316,42 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
+    <configuration name="stage3-module3-task:module-service [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/module-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="stage3-module2-task.module-main.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mjc.school.Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.stage3-module3-task [build]" />
+        <item itemvalue="Gradle.stage3-module3-task:module-service [build]" />
         <item itemvalue="Gradle.stage3-module3-task [testClasses]" />
         <item itemvalue="Gradle.stage3-module3-task [buildDependents]" />
-        <item itemvalue="Gradle.stage3-module3-task [run]" />
-        <item itemvalue="Gradle.stage3-module3-task [jar]" />
-        <item itemvalue="Gradle.stage3-module3-task [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -290,7 +376,7 @@
       <workItem from="1709737739946" duration="8246000" />
       <workItem from="1709889896994" duration="6588000" />
       <workItem from="1709988113798" duration="3379000" />
-      <workItem from="1709997898824" duration="8089000" />
+      <workItem from="1709997898824" duration="9128000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1709074059189</created>
@@ -397,7 +483,21 @@
       <option name="project" value="LOCAL" />
       <updated>1710004441884</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="15 09\3\2024">
+      <created>1710006015069</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1710006015069</updated>
+    </task>
+    <task id="LOCAL-00017" summary="16 09\3\2024">
+      <created>1710006758299</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1710006758299</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -429,6 +529,9 @@
     <MESSAGE value="12 09\3\2024" />
     <MESSAGE value="13 09\3\2024" />
     <MESSAGE value="14 09\3\2024" />
-    <option name="LAST_COMMIT_MESSAGE" value="14 09\3\2024" />
+    <MESSAGE value="15 09\3\2024" />
+    <MESSAGE value="16 09\3\2024" />
+    <MESSAGE value="17 09\3\2024" />
+    <option name="LAST_COMMIT_MESSAGE" value="17 09\3\2024" />
   </component>
 </project>

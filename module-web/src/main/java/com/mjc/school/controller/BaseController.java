@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface BaseController<T, R, K> {
 
-    List<R> readAll();
+  List<R> readAll();
 
-    R readById(K id);
+  R readById(K id);
 
-    R create(T createRequest);
+  R create(T createRequest);
 
-    R update(T updateRequest);
+  R update(T updateRequest);
 
-    boolean deleteById(K id);
+  boolean deleteById(K id);
 }

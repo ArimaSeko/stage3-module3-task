@@ -1,29 +1,16 @@
 package com.mjc.school.service.dto;
 
-import com.mjc.school.service.annotations.IdField;
-import com.mjc.school.service.annotations.NotNull;
-import com.mjc.school.service.annotations.StringField;
-
-import java.util.Objects;
+import com.mjc.school.service.validator.constraint.Max;
+import com.mjc.school.service.validator.constraint.Min;
+import com.mjc.school.service.validator.constraint.NotNull;
+import com.mjc.school.service.validator.constraint.Size;
 
 public record TagDtoRequest(
-        @IdField
+        @Min(1) 
+        @Max(Long.MAX_VALUE) 
         Long id,
-
-        @StringField(min = 3, max = 15)
         @NotNull
+        @Size(min = 3, max = 15)
         String name) {
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TagDtoRequest that = (TagDtoRequest) o;
-        return id.equals(that.id) && name.equals(that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
 }

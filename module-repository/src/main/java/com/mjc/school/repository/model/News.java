@@ -1,14 +1,30 @@
 package com.mjc.school.repository.model;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 @Entity
 @Table(name = "news")
+@EntityListeners(AuditingEntityListener.class)
 public class News implements BaseEntity<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,37 +32,43 @@ public class News implements BaseEntity<Long> {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "content", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "content", nullable = false)
     private String content;
 
     @Column(name = "create_date", nullable = false)
     private LocalDateTime createDate;
 
+    @LastModifiedDate
     @Column(name = "last_update_date", nullable = false)
-    private LocalDateTime lastUpdateDate;
+    private LocalDateTime lastUpdatedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id")
+    @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "news_tags",
-            joinColumns = { @JoinColumn(name = "news_id")},
-            inverseJoinColumns = { @JoinColumn(name = "tag_id")})
-    private Set<Tag> tags = new HashSet<>();
+        name = "news_tag",
+         joinColumns = { @JoinColumn(name = "news_id") },
+         inverseJoinColumns = { @JoinColumn(name = "tag_id") })
+    private Set<Tag> tags;
 
     public News() {
     }
 
-    public News(Long id, String title, String content, LocalDateTime createDate, LocalDateTime lastUpdateDate, Author author, Set<Tag> tags) {
+    public News(
+            final Long id,
+            final String title,
+            final String content,
+            final LocalDateTime createDate,
+            final LocalDateTime lastUpdatedDate,
+            final Author author) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.createDate = createDate;
-        this.lastUpdateDate = lastUpdateDate;
+        this.lastUpdatedDate = lastUpdatedDate;
         this.author = author;
-        this.tags = tags;
     }
 
     @Override
@@ -55,7 +77,7 @@ public class News implements BaseEntity<Long> {
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -63,7 +85,7 @@ public class News implements BaseEntity<Long> {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 
@@ -71,7 +93,7 @@ public class News implements BaseEntity<Long> {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(final String content) {
         this.content = content;
     }
 
@@ -79,16 +101,16 @@ public class News implements BaseEntity<Long> {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(final LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
-    public LocalDateTime getLastUpdateDate() {
-        return lastUpdateDate;
+    public LocalDateTime getLastUpdatedDate() {
+        return lastUpdatedDate;
     }
 
-    public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
+    public void setLastUpdatedDate(final LocalDateTime lastUpdatedDate) {
+        this.lastUpdatedDate = lastUpdatedDate;
     }
 
     public Author getAuthor() {
@@ -109,14 +131,23 @@ public class News implements BaseEntity<Long> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        News news = (News) o;
-        return id.equals(news.id) && title.equals(news.title) && content.equals(news.content) && createDate.equals(news.createDate) && lastUpdateDate.equals(news.lastUpdateDate);
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof final News other)) {
+            return false;
+        }
+        return Objects.equals(this.id, other.id)
+                && Objects.equals(this.title, other.title)
+                && Objects.equals(this.content, other.content)
+                && Objects.equals(this.createDate, other.createDate)
+                && Objects.equals(this.lastUpdatedDate, other.lastUpdatedDate)
+                && Objects.equals(this.author, other.author)
+                && Objects.equals(tags, other.tags);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, content, createDate, lastUpdateDate);
+        return Objects.hash(id, title, content, createDate, lastUpdatedDate, author, tags);
     }
 }

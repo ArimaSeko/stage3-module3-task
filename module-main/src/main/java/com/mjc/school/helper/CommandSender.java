@@ -1,15 +1,5 @@
 package com.mjc.school.helper;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mjc.school.controller.annotations.CommandBody;
-import com.mjc.school.controller.annotations.CommandHandler;
-import com.mjc.school.controller.annotations.CommandParam;
-import org.springframework.beans.factory.ListableBeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,86 +8,95 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Stream;
+
+import org.springframework.beans.factory.ListableBeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mjc.school.controller.annotation.CommandBody;
+import com.mjc.school.controller.annotation.CommandHandler;
+import com.mjc.school.controller.annotation.CommandParam;
 
 @Component
 public class CommandSender {
 
     private final Map<String, Object> controllers;
-    private final ObjectMapper objectMapper;
-    private final Map<Class<?>, Function<String, Object>> stringToObjectMapper;
+    private final ObjectMapper mapper;
+    private final Map<Class<?>, Function<String, Object>> stringToObjectMappers;
 
     @Autowired
     public CommandSender(ListableBeanFactory listableBeanFactory) {
         controllers = listableBeanFactory.getBeansWithAnnotation(Controller.class);
-        objectMapper = new ObjectMapper();
-        stringToObjectMapper = new HashMap<>();
-        stringToObjectMapper.put(Long.class, Long::valueOf);
+        Objects.requireNonNull(controllers);
+        mapper = new ObjectMapper();
+        stringToObjectMappers = new HashMap<>();
+        stringToObjectMappers.put(Long.class, Long::valueOf);
     }
 
     public Object send(Command command) throws Exception {
-        if(command == null) {
-            throw new NullPointerException("command is null");
+        if (command == null) {
+            throw new NullPointerException("Command is null");
         }
-
-        CommandHandlerWithController commandHandlerWithController = getCommandHandlerWithControllers(command.operation());
-
-        Object controller = commandHandlerWithController.controller;
+        CommandHandlerWithController commandHandlerWithController = getCommandHandlerWithController(command.operation());
         Method commandHandler = commandHandlerWithController.method;
-
+        Object controller = commandHandlerWithController.controller;
         try {
             return commandHandler.invoke(controller, getMethodArgs(command, commandHandler));
-        } catch (InvocationTargetException e) {
-            if (e.getTargetException() != null) {
-                throw (Exception) e.getTargetException();
+        } catch (InvocationTargetException ex) {
+            if (ex.getTargetException() != null) {
+                throw (Exception) ex.getTargetException();
             } else {
-                throw e;
+                throw ex;
             }
         }
-
     }
 
-    private CommandHandlerWithController getCommandHandlerWithControllers(int operation) {
-        List<CommandHandlerWithController> listOfCommandHandlers = new ArrayList<>();
-
+    private CommandHandlerWithController getCommandHandlerWithController(int operation) {
+        List<CommandHandlerWithController> commandHandlerWithControllers = new ArrayList<>();
         for (Object controller : controllers.values()) {
-            List<CommandHandlerWithController> handlersWithController = Stream.of(controller.getClass().getDeclaredMethods())
+            List<CommandHandlerWithController> controllerCommandHandlers = 
+                Stream.of(controller.getClass().getDeclaredMethods())
                     .filter(m -> !m.isBridge())
                     .filter(m -> m.isAnnotationPresent(CommandHandler.class))
-                    .filter(m -> m.getAnnotation(CommandHandler.class).operationNumber() == operation)
+                    .filter(m -> m.getAnnotation(CommandHandler.class).operation() == operation)
                     .map(m -> new CommandHandlerWithController(controller, m)).toList();
-            listOfCommandHandlers.addAll(handlersWithController);
-        }
 
-        if(listOfCommandHandlers.size() != 1) {
-            throw new RuntimeException(String.format("handlers were not found for operation: '%d'", operation));
+            commandHandlerWithControllers.addAll(controllerCommandHandlers);
         }
-        return listOfCommandHandlers.get(0);
+        
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if (commandHandlerWithControllers.size() != 1) {
+            throw new RuntimeException(String.format("0 or more than 1 handlers for operation: '%d'", operation));
+        }
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        return commandHandlerWithControllers.get(0);
     }
 
-    Object[] getMethodArgs(Command command, Method method) throws JsonProcessingException {
+    private Object[] getMethodArgs(Command command, Method method) throws JsonProcessingException {
         List<Object> args = new ArrayList<>();
-
         Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-
         for (int i = 0; i < parameterAnnotations.length; i++) {
-            for(Annotation annotation : parameterAnnotations[i]) {
-                if(annotation instanceof CommandBody) {
+            for (Annotation parameterAnnotation : parameterAnnotations[i]) {
+                if (parameterAnnotation instanceof CommandBody) {
                     Parameter parameter = method.getParameters()[i];
-                    args.add(objectMapper.readValue(command.body(), parameter.getType()));
-                }
-                else if(annotation instanceof CommandParam an && command.param() != null) {
+                    args.add(mapper.readValue(command.body(), parameter.getType()));
+                } else if (parameterAnnotation instanceof CommandParam an && command.params() != null) {
                     Parameter parameter = method.getParameters()[i];
-                    String value = command.param().get(an.name());
-                    args.add(stringToObjectMapper.get(parameter.getType()).apply(value));
+                    String value = command.params().get(an.name());
+                    args.add(stringToObjectMappers.get(parameter.getType()).apply(value));
                 }
             }
         }
         return args.toArray();
     }
 
-    private record CommandHandlerWithController(Object controller, Method method){
-
+    private record CommandHandlerWithController(Object controller, Method method) {
     }
 }

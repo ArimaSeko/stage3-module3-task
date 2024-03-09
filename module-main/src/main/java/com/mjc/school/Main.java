@@ -1,40 +1,42 @@
 package com.mjc.school;
 
+import java.util.Scanner;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.mjc.school.config.ApplicationConfig;
 import com.mjc.school.helper.Command;
 import com.mjc.school.helper.CommandSender;
 import com.mjc.school.helper.MenuHelper;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
+import com.mjc.school.helper.Operations;
 
-import java.util.Scanner;
-
-@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext applicationContext = SpringApplication.run(Main.class, args);
-        Scanner scanner = new Scanner(System.in);
+        try (var context = new AnnotationConfigApplicationContext(ApplicationConfig.class)) {
+            Scanner keyboard = new Scanner(System.in);
 
-        MenuHelper menuHelper = applicationContext.getBean(MenuHelper.class);
-        CommandSender commandSender = applicationContext.getBean(CommandSender.class);
+            MenuHelper helper = context.getBean(MenuHelper.class);
+            CommandSender commandSender = context.getBean(CommandSender.class);
 
-        while (true) {
-            try {
-                menuHelper.printMenu();
-                String key = scanner.nextLine();
-                if (key.equals("0")) {
-                    System.exit(0);
+            while (true) {
+                try {
+                    helper.printMainMenu();
+                    String key = keyboard.nextLine();
+                    if (Integer.toString(Operations.EXIT.getOperationNumber()).equals(key)) {
+                        System.exit(0);
+                    }
+
+                    Command command = helper.getCommand(key, keyboard);
+                    Object result = commandSender.send(command);
+                    if (result instanceof Iterable it) {
+                        it.forEach(System.out::println);
+                    } else {
+                        System.out.println(result);
+                    }
+
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
                 }
-
-                Command command = menuHelper.getCommand(key, scanner);
-                Object o = commandSender.send(command);
-                if (o instanceof Iterable iterable) {
-                    iterable.forEach(System.out::println);
-                } else {
-                    System.out.println(o);
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
         }
     }
