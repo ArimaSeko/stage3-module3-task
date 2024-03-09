@@ -68,7 +68,7 @@ public class NewsRepository implements BaseByTagRepository<News, Long> {
         news.setCreateDate(entity.getCreateDate());
         news.setLastUpdateTime(entity.getLastUpdateTime());
         entityManager.getTransaction().commit();
-        return null;
+        return news;
     }
 
     @Override

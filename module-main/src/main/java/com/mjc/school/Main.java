@@ -18,7 +18,7 @@ public class Main {
             Scanner keyboard = new Scanner(System.in);
 
             MenuHelper helper = context.getBean("menuHelper",MenuHelper.class);
-            CommandSender commandSender = context.getBean(CommandSender.class);
+            CommandSender commandSender = context.getBean("commandSender",CommandSender.class);
 
             while (true) {
                 try {
