@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -18,6 +19,7 @@ import java.util.Optional;
 @Repository("tagRepository")
 public class TagRepository implements BaseRepository <Tag, Long> {
     EntityManagerFactory entityManagerFactory;
+    @PersistenceContext
     EntityManager entityManager;
     @Autowired
     public TagRepository(EntityManagerFactory entityManagerFactory) {

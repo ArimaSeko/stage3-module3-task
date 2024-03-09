@@ -6,10 +6,11 @@ import com.mjc.school.controller.annotation.CommandBody;
 import com.mjc.school.controller.annotation.CommandHandler;
 import com.mjc.school.controller.annotation.CommandParam;
 import com.mjc.school.service.BaseByTagService;
+import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
 import com.mjc.school.service.impl.NewsService;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
@@ -17,13 +18,14 @@ import java.util.List;
 
 @Controller
 @Component("newsController")
-public class NewsController implements BaseController <NewsDtoRequest, NewsDtoResponse, Long>, BaseByTagService <NewsDtoResponse, Long> {
-    @Qualifier("newsService")
-    private final NewsService newsService;
+public class NewsController implements BaseController <NewsDtoRequest, NewsDtoResponse, Long>, BaseByTagController <NewsDtoResponse, Long> {
 
-
-    public NewsController(NewsService newsService) {
+    private final BaseService<NewsDtoRequest, NewsDtoResponse, Long> newsService;
+    private final BaseByTagService<NewsDtoResponse, Long> byTagService;
+    @Autowired
+    public NewsController(NewsService newsService, BaseByTagService<NewsDtoResponse, Long> byTagService) {
         this.newsService = newsService;
+        this.byTagService = byTagService;
     }
 
     @Override
@@ -59,30 +61,30 @@ public class NewsController implements BaseController <NewsDtoRequest, NewsDtoRe
     @Override
     @CommandHandler(operation = 16)
     public List<NewsDtoResponse>  byTagName(String name) {
-        return newsService.byTagName(name);
+        return byTagService.byTagName(name);
     }
 
     @Override
     @CommandHandler(operation = 17)
     public List<NewsDtoResponse> byTagId(Long id) {
-        return newsService.byTagId(id);
+        return byTagService.byTagId(id);
     }
 
     @Override
     @CommandHandler(operation = 18)
     public List<NewsDtoResponse>  byAuthorName(String authorName) {
-        return newsService.byAuthorName(authorName);
+        return byTagService.byAuthorName(authorName);
     }
 
     @Override
     @CommandHandler(operation = 19)
     public NewsDtoResponse byTitle(String title) {
-        return newsService.byTitle(title);
+        return byTagService.byTitle(title);
     }
 
     @Override
     @CommandHandler(operation = 20)
     public NewsDtoResponse byContent(String content) {
-        return newsService.byContent(content);
+        return byTagService.byContent(content);
     }
 }

@@ -10,7 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.sql.DataSource;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ComponentScan(basePackages = "com.mjc.school")
 public class ApplicationConfig {
     @Bean
@@ -24,6 +24,7 @@ public class ApplicationConfig {
     }
     @Bean("entityManagerFactory")
     public EntityManagerFactory entityManagerFactory() {
+
         return Persistence.createEntityManagerFactory("KarimNews");
     }
 }

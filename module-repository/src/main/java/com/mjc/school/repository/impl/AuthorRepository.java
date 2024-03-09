@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @Repository("authorRepository")
 public class AuthorRepository implements BaseRepository<Author, Long> {
     private EntityManagerFactory entityManagerFactory;
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Autowired
