@@ -14,8 +14,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
-@Repository
-@Component("authorRepository")
+@Repository("authorRepository")
 public class AuthorRepository implements BaseRepository<Author, Long> {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;

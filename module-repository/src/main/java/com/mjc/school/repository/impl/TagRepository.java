@@ -15,8 +15,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-@Component("tagRepository")
+@Repository("tagRepository")
 public class TagRepository implements BaseRepository <Tag, Long> {
     EntityManagerFactory entityManagerFactory;
     EntityManager entityManager;

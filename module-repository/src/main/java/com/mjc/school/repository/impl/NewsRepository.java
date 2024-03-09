@@ -5,10 +5,6 @@ import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.model.Author;
 import com.mjc.school.repository.model.News;
 import com.mjc.school.repository.model.Tag;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -22,9 +18,8 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-@Component("newsRepository")
-public class NewsRepository implements BaseRepository <News, Long>, BaseByTagRepository <News, Long> {
+@Repository("newsRepository")
+public class NewsRepository implements BaseByTagRepository<News, Long> {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;

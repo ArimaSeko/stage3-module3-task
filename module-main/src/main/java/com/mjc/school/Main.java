@@ -17,7 +17,7 @@ public class Main {
         try (var context = new AnnotationConfigApplicationContext(ApplicationConfig.class)) {
             Scanner keyboard = new Scanner(System.in);
 
-            MenuHelper helper = context.getBean(MenuHelper.class);
+            MenuHelper helper = context.getBean("menuHelper",MenuHelper.class);
             CommandSender commandSender = context.getBean(CommandSender.class);
 
             while (true) {

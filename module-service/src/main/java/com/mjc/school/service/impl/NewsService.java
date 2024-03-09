@@ -18,8 +18,7 @@ import java.util.List;
 
 import static com.mjc.school.service.exceptions.ServiceErrorCode.NEWS_ID_DOES_NOT_EXIST;
 
-@Service
-@Component("newsService")
+@Service("newsService")
 public class NewsService implements BaseService <NewsDtoRequest, NewsDtoResponse, Long>, BaseByTagService <NewsDtoResponse, Long> {
 
     private final BaseRepository <News, Long> newsRepository;

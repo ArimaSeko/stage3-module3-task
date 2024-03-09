@@ -10,16 +10,18 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
+@Component("menuHelper")
 public class MenuHelper {
 
   private final ObjectMapper mapper = new ObjectMapper();
 
   private final Map<String, Function<Scanner, Command>> operations;
 
-  private final PrintStream printStream;
+  private final PrintStream printStream = new PrintStream(System.out);
 
-  public MenuHelper(PrintStream printStream) {
+  public MenuHelper() {
     operations = new HashMap<>();
 
     operations.put(String.valueOf(GET_ALL_NEWS.getOperationNumber()), this::getNews);
@@ -34,7 +36,6 @@ public class MenuHelper {
     operations.put(String.valueOf(UPDATE_AUTHOR.getOperationNumber()), this::updateAuthor);
     operations.put(String.valueOf(REMOVE_AUTHOR_BY_ID.getOperationNumber()), this::deleteAuthor);
     operations.put(String.valueOf(GET_NEWS_BY_TAG_ID.getOperationNumber()), this::byTagId);
-    this.printStream = printStream;
   }
 
   public void printMainMenu() {

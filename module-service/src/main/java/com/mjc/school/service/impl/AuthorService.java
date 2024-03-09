@@ -16,8 +16,7 @@ import java.util.List;
 
 import static com.mjc.school.service.exceptions.ServiceErrorCode.AUTHOR_ID_DOES_NOT_EXIST;
 
-@Service
-@Component("authorService")
+@Service("authorService")
 public class AuthorService implements BaseService <AuthorDtoRequest, AuthorDtoResponse, Long> {
 
     private BaseRepository <Author, Long> authorRepository;

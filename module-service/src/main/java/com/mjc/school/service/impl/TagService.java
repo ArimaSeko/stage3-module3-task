@@ -16,8 +16,7 @@ import java.util.List;
 
 import static com.mjc.school.service.exceptions.ServiceErrorCode.TAG_ID_DOES_NOT_EXIST;
 
-@Service
-@Component("tagService")
+@Service("tagService")
 public class TagService implements BaseService <TagDtoRequest, TagDtoResponse, Long> {
 
     BaseRepository <Tag, Long> tagRepository;
